@@ -45,7 +45,6 @@ struct TileView: View {
                     .refreshable { viewModel.getResources() }
                 }
                 
-                
             }
             
         }
