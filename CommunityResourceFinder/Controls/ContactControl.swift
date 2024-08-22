@@ -62,6 +62,7 @@ class ContactControl {
                 Link(destination: URL(string: "mailto:\(data)")!, label: {
                     Text(data)
                         .textSelection(.enabled)
+                        .foregroundStyle(.blue)
                 })
             }
         }

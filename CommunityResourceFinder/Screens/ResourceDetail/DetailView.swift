@@ -44,7 +44,7 @@ struct DetailView: View {
                         
                     }
                     .frame(width: 350)
-                    .shadow(radius: 30)
+//                    .shadow(radius: 30)
 
                 } else {
                     VStack(alignment: .center) {
