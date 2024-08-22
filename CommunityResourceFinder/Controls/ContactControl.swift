@@ -24,6 +24,7 @@ class ContactControl {
                 Link(destination: URL(string: "tel:\(data)")!, label: {
                     Text(data)
                         .textSelection(.enabled)
+                        .foregroundStyle(.red)
                 })}.textSelection(.enabled)
         }
     }
@@ -42,6 +43,7 @@ class ContactControl {
                 Link(destination: URL(string: "tel:\(data)")!, label: {
                     Text(data)
                         .textSelection(.enabled)
+                        .foregroundStyle(.blue)
                 })
             }
         }
