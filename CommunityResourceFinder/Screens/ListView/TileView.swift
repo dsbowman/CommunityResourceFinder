@@ -67,7 +67,8 @@ struct TileView: View {
                 .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $viewModel.newResource) {
-            NewResourceView(newResource: $viewModel.newResource)
+//            NewResourceView(newResource: $viewModel.newResource)
+            WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
                 .presentationDragIndicator(.visible)
         }
         

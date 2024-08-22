@@ -179,19 +179,15 @@ struct DetailView: View {
 
             Button(action: {
                 viewModel.isShowingIssueForm = true
-                print("Yahtzee")
-                
-                
             }, label: {
                 Text("Report an issue")
                     .foregroundStyle(.blue)
-                   
-
-                
             })
             
             .sheet(isPresented: $viewModel.isShowingIssueForm) {
-                IssueReport(issue: $viewModel.isShowingIssueForm)
+//                IssueReport(issue: $viewModel.isShowingIssueForm)
+                WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/pag8d4CoJAscwVHcY/form")!)
+                    .ignoresSafeArea()
                     .presentationDragIndicator(.visible)
             }
 
