@@ -43,7 +43,7 @@ struct largeTile: View {
             } else {
                 VStack(alignment: .center) {
                         Text(label)
-                            .foregroundStyle(Color.primary)
+                        .foregroundStyle(.black)
                             .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                             .padding(20)

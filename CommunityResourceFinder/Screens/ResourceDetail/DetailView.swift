@@ -21,16 +21,13 @@ struct DetailView: View {
     
     
     var body: some View {
-        
         VStack {
-            Spacer().frame(height: 5)
-            VStack {
+            VStack(alignment: .center) {
                 if let imageUrl = apiData.logo?.first?.url, let _ = URL(string: imageUrl) {
-                    VStack {
-                        Spacer().frame(height: 10)
+                    VStack() {
                         ResourceRemoteImage(urlString: imageUrl)
                             .aspectRatio(contentMode: .fit)
-                            .padding(.horizontal, 15)
+                            .padding(20)
                             .frame(width: 350, height: 150)
                             .background(.white)
                             .cornerRadius(20)
@@ -41,27 +38,28 @@ struct DetailView: View {
                                 .multilineTextAlignment(.leading)
                                 .fontWeight(.semibold)
                             Spacer()
-//                                Image(systemName: "heart")
+    //                        Image(systemName: "heart")
                         }
-                        .padding(.horizontal, 20)
+                        .padding(5)
                         
                     }
-                    
-                    
+                    .frame(width: 350)
+                    .shadow(radius: 30)
+
                 } else {
-                    VStack {
-                        Text(apiData.label)
-                            .font(.title)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .foregroundStyle(Color.primary)
-                            .multilineTextAlignment(.center)
-                            .padding(15)
+                    VStack(alignment: .center) {
+                            Text(apiData.label)
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(Color.primary)
+                                .multilineTextAlignment(.center)
+                                .padding(20)
+    
+                        
                     }
-                    
                 }
             }
-            
-            
+            Spacer().frame(height: 10)
             HStack {
                 if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
                     ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)

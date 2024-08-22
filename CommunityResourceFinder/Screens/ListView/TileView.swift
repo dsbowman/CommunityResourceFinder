@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct TileView: View {
     
     @StateObject var viewModel = ListViewModel()
+    var sideMenu = false
     
     var body: some View {
         ZStack {
@@ -28,6 +27,7 @@ struct TileView: View {
                     }
                     .listStyle(.plain)
                     .navigationTitle("Resources Finder")
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem {
                             Button {
@@ -40,13 +40,13 @@ struct TileView: View {
                             }
                         }
                     }
-                    .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
                     .task { viewModel.getResources() }
-                    .refreshable { viewModel.getResources() }
                 }
-                
+                .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
+                .refreshable { viewModel.getResources() }
             }
             
+ 
         }
         .overlay {
             if viewModel.filteredResources.isEmpty && viewModel.isLoading {
@@ -62,6 +62,7 @@ struct TileView: View {
             
         }
         .sheet(isPresented: $viewModel.isShowingDetail) {
+            Spacer().frame(height: 20)
             DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
                 .presentationDragIndicator(.visible)
         }
@@ -71,6 +72,7 @@ struct TileView: View {
         }
         
     }
+    
 }
 
 #Preview {

@@ -38,3 +38,17 @@ struct LoadingView: View {
         }
     }
 }
+
+//struct ProgressView: View {
+//    var body: some View {
+//        ZStack {
+//            Color(.systemBackground)
+//                .ignoresSafeArea()
+//            
+//            VStack {
+//                ProgressView("Loading")
+//                    .progressViewStyle(.linear)
+//            }
+//        }
+//    }
+//}

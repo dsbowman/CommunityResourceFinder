@@ -15,13 +15,15 @@ struct IssueReport: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Title", text: $viewModel.title)
-                TextField("Full Name", text: $viewModel.name)
-                TextField("Email", text: $viewModel.email)
-                TextField("Description", text: $viewModel.description)
+                TextField("Full Name:", text: $viewModel.name)
+                TextField("Email:", text: $viewModel.email)
+                TextField("Subject:", text: $viewModel.subject)
+                TextField("Description:", text: $viewModel.description, axis: .vertical)
+                    .multilineTextAlignment(.leading)
+                    .frame(minHeight: 100, alignment: .topLeading)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Report an Issue")
+            .navigationTitle("Share Feedback")
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(action: {

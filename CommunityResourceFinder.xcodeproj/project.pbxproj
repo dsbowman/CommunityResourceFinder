@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E107F0962C69097B00B0B817 /* DetailCircleActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */; };
 		E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AE82C66CCD1004D2A35 /* CommunityResourceFinderApp.swift */; };
 		E10E6AEB2C66CCD1004D2A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */; };
 		E10E6AED2C66CCD2004D2A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E6AEC2C66CCD2004D2A35 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCircleActionButton.swift; sourceTree = "<group>"; };
 		E10E6AE52C66CCD1004D2A35 /* CommunityResourceFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommunityResourceFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10E6AE82C66CCD1004D2A35 /* CommunityResourceFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityResourceFinderApp.swift; sourceTree = "<group>"; };
 		E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				E10E6B122C66FA40004D2A35 /* Header.swift */,
 				E10E6B142C66FA6A004D2A35 /* ContactControl.swift */,
 				E10E6B162C66FAB3004D2A35 /* ContactButton.swift */,
+				E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */,
 				E10E6B0B2C66D065004D2A35 /* RemoteImageView.swift in Sources */,
 				E10E6B092C66D04C004D2A35 /* LoadingView.swift in Sources */,
+				E107F0962C69097B00B0B817 /* DetailCircleActionButton.swift in Sources */,
 				E10E6B152C66FA6A004D2A35 /* ContactControl.swift in Sources */,
 				E10E6B252C66FBE1004D2A35 /* TileView.swift in Sources */,
 				E10E6B192C66FB28004D2A35 /* ListViewModel.swift in Sources */,

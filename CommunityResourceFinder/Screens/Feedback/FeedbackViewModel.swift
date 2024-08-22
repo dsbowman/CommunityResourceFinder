@@ -10,7 +10,7 @@ import Foundation
 
 class IssueReportViewModel: ObservableObject {
     
-    @Published var title = ""
+    @Published var subject = ""
     @Published var email = ""
     @Published var name = ""
     @Published var description = ""

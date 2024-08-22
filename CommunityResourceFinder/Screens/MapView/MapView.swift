@@ -48,7 +48,7 @@ struct MapView: View {
                 DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
                     .presentationDetents([.height(225), .medium, .large], selection: $settingsDetent)
                     .presentationDragIndicator(.visible)
-                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
+                    .presentationBackgroundInteraction(.enabled(upThrough: .medium))
             }
 //            .sheet(isPresented: $viewModel.isShowingList) {
 //                TileListView()
