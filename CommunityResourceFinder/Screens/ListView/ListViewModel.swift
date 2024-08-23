@@ -33,6 +33,7 @@ import CoreLocation
     }
     
 
+
     
     func getResources() {
         isLoading = true
