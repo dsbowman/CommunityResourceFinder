@@ -31,7 +31,7 @@ struct Fields: Decodable {
     var type: FieldsType?
     var label: String
     var hoursOfOperation, phoneContact, emergencyAssistanceNumber: String?
-    var phoneContact2, street1, street2, email: String?
+    var phoneContact2, street1, street2, email, status: String?
     var state, zip, city: String?
     var location: String?
     var locationCoordinate: CLLocationCoordinate2D?
@@ -51,6 +51,7 @@ struct Fields: Decodable {
         case street1 = "Street 1"
         case street2 = "Street 2"
         case email = "Email"
+        case status = "Status"
         case state = "State"
         case zip = "Zip"
         case city = "City"

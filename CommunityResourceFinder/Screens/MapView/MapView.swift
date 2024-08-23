@@ -21,7 +21,7 @@ struct MapView: View {
     var body: some View {
         VStack {
             Map(position: $position) {
-                ForEach(viewModel.resources) { record in
+                ForEach(viewModel.filteredResources) { record in
                     if let coordinate = record.fields.locationCoordinate {
                         Annotation(record.fields.label, coordinate: coordinate) {
                             Circle()
