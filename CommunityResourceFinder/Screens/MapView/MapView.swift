@@ -43,6 +43,7 @@ struct MapView: View {
             .onAppear {
                 locationServices.checkIfLocationServicesIsEnabled()
             }
+            
             .sheet(isPresented: $viewModel.isShowingDetail) {
                 Spacer().frame(height: 50)
                 DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
@@ -62,6 +63,21 @@ struct MapView: View {
         .task {
             viewModel.getResources()
             viewModel.fetchCoordinates()
+        }
+        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
+        .navigationTitle("Resources Finder")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    viewModel.newResource = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                        .fontWeight(.semibold)
+                        .tint(.teal)
+                }
+            }
         }
     }
 }
