@@ -34,6 +34,7 @@ struct MapView: View {
                                     .onTapGesture {
                                         viewModel.selectedResource = record.fields
                                         viewModel.isShowingDetail = true
+
                                             
                                     }
                                     .frame(width: 30, height: 30)
@@ -50,13 +51,14 @@ struct MapView: View {
                 .mapControls {
                     MapScaleView()
                     MapCompass()
-                    MapUserLocationButton()
+//                    MapUserLocationButton()
                     MapPitchToggle()
                 }
+
                 .sheet(isPresented: $viewModel.isShowingDetail) {
                     Spacer().frame(height: 50)
                     DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
-                        .presentationDetents([.height(225), .medium, .large], selection: $settingsDetent)
+                        .presentationDetents([.medium, .large], selection: $settingsDetent)
                         .presentationDragIndicator(.visible)
                         .presentationBackgroundInteraction(.enabled(upThrough: .medium))
                 }
@@ -67,6 +69,11 @@ struct MapView: View {
     //                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
     //                    .presentationContentInteraction(.scrolls)
     //            }
+                .sheet(isPresented: $viewModel.newResource) {
+        //            NewResourceView(newResource: $viewModel.newResource)
+                    WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
+                        .presentationDragIndicator(.visible)
+                }
                 
             }
             .task {
@@ -74,6 +81,9 @@ struct MapView: View {
                 viewModel.fetchCoordinates()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
+            .onTapGesture {
+                
+            }
             .navigationTitle("Resources Finder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

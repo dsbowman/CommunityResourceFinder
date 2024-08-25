@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct CommunityResourceFinderApp: App {
+struct ResourceFinderApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
