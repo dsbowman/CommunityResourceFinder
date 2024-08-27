@@ -36,6 +36,7 @@ struct DetailCircleActionButton: View {
             }) {
                 CircleButtonDisabled(icon: "safari.fill")
             }
+            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             
         }
     }

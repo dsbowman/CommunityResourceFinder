@@ -17,14 +17,14 @@ struct MapView: View {
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var automaticPosition = MapCameraPosition.automatic
     @StateObject private var locationServices = LocationService()
-    @State private var position = MapCameraPosition.userLocation(followsHeading: true, fallback: .automatic)
+    @State private var isShowingUserLocation = true
     
 
     
     var body: some View {
         NavigationStack {
             VStack {
-                Map(position: $automaticPosition ) {
+                Map(position: isShowingUserLocation ? $userPosition : $automaticPosition ) {
                     ForEach(viewModel.filteredResources) { record in
                         if let coordinate = record.fields.locationCoordinate {
                             Annotation(record.fields.label, coordinate: coordinate) {
@@ -48,11 +48,22 @@ struct MapView: View {
                 .onAppear {
                     locationServices.checkIfLocationServicesIsEnabled()
                 }
+                .onChange(of: viewModel.searchText) {
+                    // If there's search text, disable user location tracking
+                    if !$0.isEmpty {
+                        isShowingUserLocation = false
+                        if let firstCoordinate = viewModel.filteredResources.first?.fields.locationCoordinate {
+                            automaticPosition = MapCameraPosition.userLocation(fallback: .automatic)
+                        }
+                    } else {
+                        isShowingUserLocation = true
+                    }
+                }
                 .mapControls {
                     MapScaleView()
                     MapCompass()
-//                    MapUserLocationButton()
                     MapPitchToggle()
+                    MapUserLocationButton()
                 }
 
                 .sheet(isPresented: $viewModel.isShowingDetail) {
@@ -81,9 +92,6 @@ struct MapView: View {
                 viewModel.fetchCoordinates()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
-            .onTapGesture {
-                
-            }
             .navigationTitle("Resources Finder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

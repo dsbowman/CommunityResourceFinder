@@ -24,10 +24,14 @@ import CoreLocation
     private let locationManager = CLLocationManager() // Add location manager
     let columns: [GridItem] = [GridItem(.adaptive(minimum: 350))]
     
+    var approvedResources: [Record] {
+        resources.filter { $0.fields.status == "Active"}
+    }
+    
     var filteredResources: [Record] {
-        guard !searchText.isEmpty else {return resources}
+        guard !searchText.isEmpty else {return approvedResources}
         
-        return resources.filter { resource in
+        return approvedResources.filter { resource in
             resource.fields.label.localizedCaseInsensitiveContains(searchText) || resource.fields.descriptionNotes?.localizedCaseInsensitiveContains(searchText) ?? false || resource.fields.tags?.debugDescription.localizedCaseInsensitiveContains(searchText) ?? false
         }
     }
