@@ -25,7 +25,12 @@ struct DetailView: View {
             VStack(alignment: .center) {
                 if let imageUrl = apiData.logo?.first?.url, let _ = URL(string: imageUrl) {
                     VStack() {
-                        ResourceRemoteImage(urlString: imageUrl)
+                        AsyncImage(url: URL(string: imageUrl)) { image in
+                            image.resizable()
+                        } placeholder: {
+                            ProgressView()
+                                .controlSize(.large)
+                        }
                             .aspectRatio(contentMode: .fit)
                             .padding(20)
                             .frame(width: 350, height: 150)
@@ -44,8 +49,6 @@ struct DetailView: View {
                         
                     }
                     .frame(width: 350)
-//                    .shadow(radius: 30)
-
                 } else {
                     VStack(alignment: .center) {
                             Text(apiData.label)

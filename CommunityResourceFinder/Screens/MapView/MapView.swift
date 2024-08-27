@@ -35,7 +35,6 @@ struct MapView: View {
                                         viewModel.selectedResource = record.fields
                                         viewModel.isShowingDetail = true
 
-                                            
                                     }
                                     .frame(width: 30, height: 30)
                             }
@@ -89,7 +88,7 @@ struct MapView: View {
             }
             .task {
                 viewModel.getResources()
-                viewModel.fetchCoordinates()
+//                viewModel.fetchCoordinates()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
             .navigationTitle("Resources Finder")
