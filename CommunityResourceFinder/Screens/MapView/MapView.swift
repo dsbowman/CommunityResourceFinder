@@ -51,7 +51,7 @@ struct MapView: View {
                     // If there's search text, disable user location tracking
                     if !$0.isEmpty {
                         isShowingUserLocation = false
-                        if let firstCoordinate = viewModel.filteredResources.first?.fields.locationCoordinate {
+                        if (viewModel.filteredResources.first?.fields.locationCoordinate) != nil {
                             automaticPosition = MapCameraPosition.userLocation(fallback: .automatic)
                         }
                     } else {
