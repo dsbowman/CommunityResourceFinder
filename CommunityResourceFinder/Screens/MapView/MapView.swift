@@ -19,7 +19,7 @@ struct MapView: View {
     @StateObject private var locationServices = LocationService()
     @State private var isShowingUserLocation = true
     
-
+    
     
     var body: some View {
         NavigationStack {
@@ -34,22 +34,22 @@ struct MapView: View {
                                     .onTapGesture {
                                         viewModel.selectedResource = record.fields
                                         viewModel.isShowingDetail = true
-
+                                        
                                     }
                                     .frame(width: 30, height: 30)
                             }
-                         
+                            
                         }
                     }
-
+                    
                 }
                 .accentColor(.teal)
                 .onAppear {
                     locationServices.checkIfLocationServicesIsEnabled()
                 }
-                .onChange(of: viewModel.searchText) {
+                .onChange(of: viewModel.searchText) { oldValue, newValue in
                     // If there's search text, disable user location tracking
-                    if !$0.isEmpty {
+                    if !newValue.isEmpty {
                         isShowingUserLocation = false
                         if (viewModel.filteredResources.first?.fields.locationCoordinate) != nil {
                             automaticPosition = MapCameraPosition.userLocation(fallback: .automatic)
@@ -64,7 +64,7 @@ struct MapView: View {
                     MapPitchToggle()
                     MapUserLocationButton()
                 }
-
+                
                 .sheet(isPresented: $viewModel.isShowingDetail) {
                     Spacer().frame(height: 50)
                     DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
@@ -72,15 +72,15 @@ struct MapView: View {
                         .presentationDragIndicator(.visible)
                         .presentationBackgroundInteraction(.enabled(upThrough: .medium))
                 }
-    //            .sheet(isPresented: $viewModel.isShowingList) {
-    //                TileListView()
-    //                    .presentationDetents([.height(300), .medium, .large], selection: $settingsDetent)
-    //                    .presentationDragIndicator(.visible)
-    //                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
-    //                    .presentationContentInteraction(.scrolls)
-    //            }
+                //            .sheet(isPresented: $viewModel.isShowingList) {
+                //                TileListView()
+                //                    .presentationDetents([.height(300), .medium, .large], selection: $settingsDetent)
+                //                    .presentationDragIndicator(.visible)
+                //                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
+                //                    .presentationContentInteraction(.scrolls)
+                //            }
                 .sheet(isPresented: $viewModel.newResource) {
-        //            NewResourceView(newResource: $viewModel.newResource)
+                    //            NewResourceView(newResource: $viewModel.newResource)
                     WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
                         .presentationDragIndicator(.visible)
                 }
@@ -88,23 +88,21 @@ struct MapView: View {
             }
             .task {
                 viewModel.getResources()
-//                viewModel.fetchCoordinates()
+                //                viewModel.fetchCoordinates()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
             .navigationTitle("Resources Finder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem {
-                    Button {
-                        viewModel.newResource = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
-                            .fontWeight(.semibold)
-                            .tint(.teal)
-                    }
+                Button {
+                    viewModel.newResource = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                        .fontWeight(.semibold)
+                        .tint(.teal)
                 }
-        }
+            }
         }
     }
 }

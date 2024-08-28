@@ -16,7 +16,9 @@ struct NewResourceView: View {
             Form {
                 Section(header: Text("About")) {
                     TextField("Label", text: $viewModel.newResource.label)
-                    TextField("Description", text: $viewModel.newResource.descriptionNotes)
+                    TextField("Description", text: $viewModel.newResource.descriptionNotes, axis: .vertical)
+                        .multilineTextAlignment(.leading)
+                        .frame(minHeight: 75, alignment: .topLeading)
                     TextField("Hours of Operation", text: $viewModel.newResource.hoursOfOperation)
                     
                 }
@@ -40,6 +42,10 @@ struct NewResourceView: View {
                     }
                     
                 }
+                
+//                Section(header: text("Tag(s)")) {
+//                    
+//                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("New Resource")
