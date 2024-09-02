@@ -11,19 +11,41 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var selectedTab = 0
+    
+//    init() {
+//        UITabBar.appearance().isHidden = true
+//    }
+    
     var body: some View {
-        TabView {
-            TileView()
-                .tabItem { Label("List", systemImage: "list.bullet") }
+        
+        ZStack(alignment: .bottom) {
+            TabView(selection: $selectedTab) {
+                TileView()
+                    .tag(0)
+                    .toolbar(.hidden, for: .tabBar)
+                    
+                MapView()
+                    .tag(1)
+                    .toolbar(.hidden, for: .tabBar)
+            }
             
-//            ListView()
-//                .tabItem { Label("List", systemImage: "list.bullet") }
             
-            MapView()
-                .tabItem { Label("Map", systemImage: "globe")}
-            
-            
-            
+            HStack{
+                ForEach((TabbedItems.allCases), id: \.self){ item in
+                    Button{
+                        selectedTab = item.rawValue
+                    } label: {
+                        CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                    }
+                }
+            }
+            .padding(6)
+            .frame(height: 60)
+            .background(.softBlue)
+            .cornerRadius(25)
+            .padding(.horizontal, 26)
+
         }
         .accentColor(.teal)
     }
@@ -35,3 +57,26 @@ struct ContentView: View {
     ContentView()
 }
 
+extension ContentView {
+    func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
+        HStack(spacing: 10){
+            Spacer()
+            Image(systemName: imageName)
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(isActive ? .white : .white)
+                .frame(width: 20, height: 20)
+            if isActive{
+                Text(title)
+                    .font(.system(size: 14))
+                    .foregroundColor(isActive ? .white : .white)
+            }
+            Spacer()
+        }
+        .frame(width: isActive ? 100 : 60, height: 50)
+        //change the first value to .infinity when adding additional menu choices or expand appropriate to the number of choices
+        
+        .background(isActive ? .darkBlue.opacity(0.5) : .clear)
+        .cornerRadius(20)
+    }
+}

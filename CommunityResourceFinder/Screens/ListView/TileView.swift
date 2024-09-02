@@ -36,9 +36,10 @@ struct TileView: View {
                                 Image(systemName: "plus.circle.fill")
                                     .imageScale(.large)
                                     .fontWeight(.semibold)
-                                    .tint(.teal)
+                                    .tint(.softBlue)
                             }
                         }
+                        
                     }
                     .task { viewModel.getResources() }
                 }
@@ -66,6 +67,9 @@ struct TileView: View {
             DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
                 .presentationDragIndicator(.visible)
         }
+
+        
+        
         .sheet(isPresented: $viewModel.newResource) {
 //            NewResourceView(newResource: $viewModel.newResource)
             WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
