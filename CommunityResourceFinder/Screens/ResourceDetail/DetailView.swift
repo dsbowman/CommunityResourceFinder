@@ -200,8 +200,6 @@ struct DetailView: View {
     
 }
 
-
-
 struct DetailHeaderView: View {
     
     var apiData: Fields
