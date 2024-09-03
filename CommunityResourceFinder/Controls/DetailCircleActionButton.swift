@@ -9,68 +9,54 @@ import SwiftUI
 
 struct DetailCircleActionButton: View {
     
-    var label: String
-    var image: String
-    var imageColor: Color
-    var action: String?
-    var state: Bool
+    var phone: String?
+    var email: String?
+    var street1: String?
+    var street2: String?
+    var city: String?
+    var state: String?
+    var url: String?
+    
     
     var body: some View {
-        HStack(spacing: 15) {
-            CircleButton(icon: "phone.fill", action: "812-552-9102")
-            
-            Button(action: {
-                
-            }) {
-                CircleButtonView(icon: "envelope.fill")
+        HStack(spacing: 30) {
+            if let phone = phone {
+                CircleButton(icon: "phone.fill", action: "tel:\(phone)")
+            } else {
+                CircleButtonDisabled(icon: "phone.fill")
             }
             
-            Button(action: {
-                
-            }) {
-                CircleButtonView(icon: "map.fill")
+            if let email = email {
+                CircleButton(icon: "envelope.fill", action: "mailto:\(email)")
+            } else {
+                CircleButtonDisabled(icon: "envelope.fill")
             }
             
-            Button(action: {
+            if let street1 = street1, let street2 = street2, let city = city, let state = state {
+                CircleButton(icon: "map.fill", action: "http://maps.apple.com/?address=\(street1),\(street2),\(city),\(state)")
+            } else {
+                CircleButtonDisabled(icon: "map.fill")
+            }
+            
+            if let url = url {
+                CircleButton(icon: "safari.fill", action: url)
                 
-            }) {
+            } else {
                 CircleButtonDisabled(icon: "safari.fill")
             }
-            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             
         }
     }
 }
 
 #Preview {
-    DetailCircleActionButton(label: "Test", image: "phone.fill", imageColor: .primary, action: "812-552-9102", state: false)
+    DetailCircleActionButton()
 }
-
-struct CircleButtonView: View {
-    
-    var icon: String
-    var backgroundColor: Color?
-    
-    var body: some View {
-        ZStack(alignment: .center) {
-            Circle()
-                .foregroundColor(backgroundColor ?? .teal)
-            Image(systemName: icon)
-                .foregroundColor(.white)
-                .imageScale(.large)
-        }
-        .frame(width: 40, height: 40)
-    }
-}
-
 
 struct CircleButton: View {
     
     var icon: String
-    var backgroundColor: Color?
-    var foregroundColor: Color?
     var action: String
-    var disabled: Bool?
     
     var body: some View {
         Button(action: {
@@ -80,9 +66,9 @@ struct CircleButton: View {
         }) {
             ZStack(alignment: .center) {
                 Circle()
-                    .foregroundColor(backgroundColor ?? .teal)
+                    .foregroundColor(.darkBlue)
                 Image(systemName: icon)
-                    .foregroundColor(foregroundColor ?? .white)
+                    .foregroundColor(.white)
                     .imageScale(.large)
             }
             .frame(width: 40, height: 40)

@@ -63,19 +63,20 @@ struct DetailView: View {
                 }
             }
             Spacer().frame(height: 10)
-            HStack {
-                if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
-                    ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)
-                }
-                
-                if let phoneContact = apiData.phoneContact {
-                    ContactButton(label: "Call", image: "phone.fill", imageColor: Color.blue, action: "tel:\(phoneContact)", state: false)
-                }
-                
-                if let street1 = apiData.street1, let city = apiData.city, let state = apiData.state, let zip = apiData.zip {
-                    ContactButton(label: "Directions", image: "map.fill", imageColor: Color.blue, action:"http://maps.apple.com/?address=\(street1),\(city),\(state),\(zip)", state: false)
-                }
-            }
+            DetailCircleActionButton(phone: apiData.phoneContact, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
+//            HStack {
+//                if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
+//                    ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)
+//                }
+//                
+//                if let phoneContact = apiData.phoneContact {
+//                    ContactButton(label: "Call", image: "phone.fill", imageColor: Color.blue, action: "tel:\(phoneContact)", state: false)
+//                }
+//                
+//                if let street1 = apiData.street1, let city = apiData.city, let state = apiData.state, let zip = apiData.zip {
+//                    ContactButton(label: "Directions", image: "map.fill", imageColor: Color.blue, action:"http://maps.apple.com/?address=\(street1),\(city),\(state),\(zip)", state: false)
+//                }
+//            }
         }
         .padding(.bottom, 15)
         
