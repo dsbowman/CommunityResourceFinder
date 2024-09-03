@@ -20,7 +20,6 @@ struct MapView: View {
     @State private var isShowingUserLocation = true
     
     
-    
     var body: some View {
         NavigationStack {
             VStack {

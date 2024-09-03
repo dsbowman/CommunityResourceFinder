@@ -13,9 +13,7 @@ struct ContentView: View {
     
     @State var selectedTab = 0
     
-//    init() {
-//        UITabBar.appearance().isHidden = true
-//    }
+    
     
     var body: some View {
         
@@ -45,6 +43,7 @@ struct ContentView: View {
             .background(.softBlue)
             .cornerRadius(25)
             .padding(.horizontal, 26)
+            .padding(.bottom, 10)
 
         }
         .accentColor(.teal)

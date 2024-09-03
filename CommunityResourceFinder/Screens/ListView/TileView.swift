@@ -12,11 +12,20 @@ struct TileView: View {
     @StateObject var viewModel = ListViewModel()
     var sideMenu = false
     
+//    init() {
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithTransparentBackground()
+//        appearance.backgroundColor = UIColor(Color.white.opacity(0.8))
+//        UINavigationBar.appearance().standardAppearance = appearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//        }
+    
+    
     var body: some View {
         ZStack {
             NavigationStack {
                 ScrollView {
-                    LazyVGrid(columns: viewModel.columns, spacing: 40) {ForEach(viewModel.filteredResources.sorted(by: {$0.fields.label < $1.fields.label }), id: \.id) { apiData in
+                    LazyVGrid(columns: viewModel.columns, spacing: 30) {ForEach(viewModel.filteredResources.sorted(by: {$0.fields.label < $1.fields.label }), id: \.id) { apiData in
                         largeTile(label: apiData.fields.label , imageUrl: apiData.fields.logo?.first?.url ?? "", description: apiData.fields.descriptionNotes ?? "")
                                 .accentColor(.primary)
                                 .onTapGesture {
@@ -42,11 +51,11 @@ struct TileView: View {
                         
                     }
                     .task { viewModel.getResources() }
+                    .background(.ultraThinMaterial)
                 }
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
                 .refreshable { viewModel.getResources() }
             }
-            
  
         }
         .overlay {
