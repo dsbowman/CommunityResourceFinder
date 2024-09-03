@@ -63,7 +63,7 @@ struct DetailView: View {
                 }
             }
             Spacer().frame(height: 10)
-            DetailCircleActionButton(phone: apiData.phoneContact, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
+//            ContactMenu(phone: apiData.phoneContact, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
 //            HStack {
 //                if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
 //                    ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)

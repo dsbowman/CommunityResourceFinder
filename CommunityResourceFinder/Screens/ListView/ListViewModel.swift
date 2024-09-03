@@ -17,6 +17,7 @@ import CoreLocation
     @Published var searchText: String = ""
     @Published var isShowingList = true
     @Published var isShowingDetail = false
+    @Published var showWebView = false
     @Published var selectedResource: Fields?
     @Published var newResource = false
     @Published var isSheetPresented = true
