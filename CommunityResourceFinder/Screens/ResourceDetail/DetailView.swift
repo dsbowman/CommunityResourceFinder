@@ -44,7 +44,7 @@ struct DetailView: View {
                                 .foregroundStyle(.primary)
                                 .multilineTextAlignment(.leading)
                                 .fontWeight(.semibold)
-                            Spacer()
+//                            Spacer()
     //                        Image(systemName: "heart")
                         }
                         .padding(5)
