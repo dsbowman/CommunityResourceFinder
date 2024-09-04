@@ -103,20 +103,6 @@ class ContactControl {
 }
 
 
-struct WebView: UIViewControllerRepresentable {
-    
-    var url: URL
-  
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<WebView>) -> SFSafariViewController {
-            SFSafariViewController(url: url)
-        }
-    
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<WebView>) {}
+#Preview {
+    ContactControl.website(url: "dekebowman.smugmug.com") as any View
 }
-
-
-
-//#Preview {
-//    ContactControl.website(url: "dekebowman.smugmug.com") as any View
-//}

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E107F0962C69097B00B0B817 /* DetailCircleActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */; };
+		E107F0962C69097B00B0B817 /* ContactMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107F0952C69097B00B0B817 /* ContactMenu.swift */; };
 		E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AE82C66CCD1004D2A35 /* CommunityResourceFinderApp.swift */; };
 		E10E6AEB2C66CCD1004D2A35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */; };
 		E10E6AED2C66CCD2004D2A35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E6AEC2C66CCD2004D2A35 /* Assets.xcassets */; };
@@ -39,10 +39,12 @@
 		E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2C2C66FC74004D2A35 /* FeedbackViewModel.swift */; };
 		E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */; };
 		E1A647252C8278B50068109E /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A647242C8278B50068109E /* TabbedItems.swift */; };
+		E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */; };
+		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCircleActionButton.swift; sourceTree = "<group>"; };
+		E107F0952C69097B00B0B817 /* ContactMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMenu.swift; sourceTree = "<group>"; };
 		E10E6AE52C66CCD1004D2A35 /* CommunityResourceFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommunityResourceFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10E6AE82C66CCD1004D2A35 /* CommunityResourceFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityResourceFinderApp.swift; sourceTree = "<group>"; };
 		E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,8 @@
 		E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
+		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
+		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,13 +188,12 @@
 		E10E6AFB2C66CD2D004D2A35 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				E1C047202C87476900540B89 /* Contact Buttons */,
 				E10E6B0C2C66D091004D2A35 /* LargeTile.swift */,
 				E10E6B0E2C66D0AF004D2A35 /* ListItem.swift */,
 				E10E6B102C66D0D1004D2A35 /* CategoryListTile.swift */,
 				E10E6B122C66FA40004D2A35 /* Header.swift */,
-				E10E6B142C66FA6A004D2A35 /* ContactControl.swift */,
-				E10E6B162C66FAB3004D2A35 /* ContactButton.swift */,
-				E107F0952C69097B00B0B817 /* DetailCircleActionButton.swift */,
+				E1E7216C2C887F8700BC0DEA /* WebView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -255,6 +258,17 @@
 				E1A647242C8278B50068109E /* TabbedItems.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E1C047202C87476900540B89 /* Contact Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */,
+				E107F0952C69097B00B0B817 /* ContactMenu.swift */,
+				E10E6B162C66FAB3004D2A35 /* ContactButton.swift */,
+				E10E6B142C66FA6A004D2A35 /* ContactControl.swift */,
+			);
+			path = "Contact Buttons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
+				E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */,
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
 				E10E6B0D2C66D091004D2A35 /* LargeTile.swift in Sources */,
 				E10E6B232C66FBB9004D2A35 /* MapView.swift in Sources */,
@@ -347,12 +362,13 @@
 				E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */,
 				E10E6B1F2C66FB7B004D2A35 /* DetailView.swift in Sources */,
 				E10E6B132C66FA40004D2A35 /* Header.swift in Sources */,
+				E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */,
 				E10E6AFD2C66CD5D004D2A35 /* CommunityResourceModel.swift in Sources */,
 				E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */,
 				E1A647252C8278B50068109E /* TabbedItems.swift in Sources */,
 				E10E6B0B2C66D065004D2A35 /* RemoteImageView.swift in Sources */,
 				E10E6B092C66D04C004D2A35 /* LoadingView.swift in Sources */,
-				E107F0962C69097B00B0B817 /* DetailCircleActionButton.swift in Sources */,
+				E107F0962C69097B00B0B817 /* ContactMenu.swift in Sources */,
 				E10E6B152C66FA6A004D2A35 /* ContactControl.swift in Sources */,
 				E10E6B252C66FBE1004D2A35 /* TileView.swift in Sources */,
 				E10E6B192C66FB28004D2A35 /* ListViewModel.swift in Sources */,

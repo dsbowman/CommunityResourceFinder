@@ -54,6 +54,10 @@ struct TileView: View {
                     .background(.ultraThinMaterial)
                 }
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
+//                .searchSuggestions{
+//                    Text("Food").searchCompletion("Food")
+//                    Text("Housing").searchCompletion("Housing")
+//                }
                 .refreshable { viewModel.getResources() }
             }
  
