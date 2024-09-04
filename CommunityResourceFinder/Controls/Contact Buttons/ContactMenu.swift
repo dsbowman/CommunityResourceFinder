@@ -11,8 +11,9 @@ import SafariServices
 
 
 struct ContactMenu: View {
-    @State var showWebView = false
+    
     var phone: String?
+    var emergency: String?
     var email: String?
     var street1: String?
     var street2: String?
@@ -23,7 +24,11 @@ struct ContactMenu: View {
     
     
     var body: some View {
-        HStack(spacing: 30) {
+        HStack(spacing: 25) {
+            if let emergency = emergency {
+                RoundContactControl.ActionButton(icon: "sos.circle", activeColor: .red, url: "tel:\(emergency)")
+            }
+            
             if let phone = phone {
                 RoundContactControl.ActionButton(icon: "phone.fill", url: "tel:\(phone)")
             } else {
@@ -42,20 +47,13 @@ struct ContactMenu: View {
                 RoundContactControl.ActionButton(icon: "map.fill", isDisabled: true)
             }
             
-//            if let url = url {
-//                RoundContactControl.ActionButton(icon: "safari.fill")
-//                    .onTapGesture {
-//                        showWebView.toggle()
-//                    }
-//                    .sheet(isPresented: $showWebView, content: {
-//                        WebView(url: URL(string: url)!)
-//                            .ignoresSafeArea()
-//                    })
-//                
-//            } else {
-//                RoundContactControl.ActionButton(icon: "safari.fill", isDisabled: true)
-//
-//            }
+            if let url = url {
+                RoundContactControl.ActionButton(icon: "safari.fill", url: url, loadWebsite: true)
+                
+            } else {
+                RoundContactControl.ActionButton(icon: "safari.fill", isDisabled: true)
+
+            }
             
         }
     }
@@ -64,6 +62,5 @@ struct ContactMenu: View {
 #Preview {
     ContactMenu()
 }
-
 
 

@@ -40,6 +40,7 @@
 		E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */; };
 		E1A647252C8278B50068109E /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A647242C8278B50068109E /* TabbedItems.swift */; };
 		E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */; };
+		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
+		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				E10E6B0E2C66D0AF004D2A35 /* ListItem.swift */,
 				E10E6B102C66D0D1004D2A35 /* CategoryListTile.swift */,
 				E10E6B122C66FA40004D2A35 /* Header.swift */,
+				E1E7216C2C887F8700BC0DEA /* WebView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
+				E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */,
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
 				E10E6B0D2C66D091004D2A35 /* LargeTile.swift in Sources */,
 				E10E6B232C66FBB9004D2A35 /* MapView.swift in Sources */,

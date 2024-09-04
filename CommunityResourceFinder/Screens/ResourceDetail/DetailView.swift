@@ -19,6 +19,8 @@ struct DetailView: View {
             )
         )
     
+    @State var showWebView = false
+    
     
     var body: some View {
         VStack {
@@ -63,7 +65,7 @@ struct DetailView: View {
                 }
             }
             Spacer().frame(height: 10)
-//            ContactMenu(phone: apiData.phoneContact, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
+            ContactMenu(phone: apiData.phoneContact, emergency: apiData.emergencyAssistanceNumber, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
 //            HStack {
 //                if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
 //                    ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)
@@ -194,6 +196,7 @@ struct DetailView: View {
                     .ignoresSafeArea()
                     .presentationDragIndicator(.visible)
             }
+
 
         }
         .listStyle(.plain)
