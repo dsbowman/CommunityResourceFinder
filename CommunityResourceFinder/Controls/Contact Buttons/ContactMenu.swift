@@ -42,7 +42,7 @@ struct ContactMenu: View {
             }
             
             if let street1 = street1, let city = city, let state = state {
-                RoundContactControl.ActionButton(icon: "map.fill", url: "http://maps.apple.com/?address=\(street1),\(city),\(state)")
+                RoundContactControl.ActionButton(icon: "map.fill", url: "http://maps.apple.com/?address=\(street1), \(street2 ?? ""), \(city), \(state)")
             } else {
                 RoundContactControl.ActionButton(icon: "map.fill", isDisabled: true)
             }

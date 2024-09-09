@@ -34,36 +34,36 @@ class MapViewModel: ObservableObject {
     
     
     
-    func getResources() {
-        isLoading = true
-        Task {
-            do {
-                resources = try await NetworkManager.shared.getData()
-            } catch {
-                if let apError = error as? APError {
-                    switch apError {
-                        
-                    case .invalidURL:
-                        alertItem = AlertContext.invalidURL
-                    case .invalidResponse:
-                        alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        alertItem = AlertContext.invalidData
-                    case .unableToComplete:
-                        alertItem = AlertContext.unableToComplete
-                    }
-                    
-                } else {
-                    alertItem = AlertContext.invalidResponse
-                }
-                alertItem = AlertContext.invalidResponse
-                isLoading = false
-            }
-            fetchCoordinates() // Fetch coordinates after resources are loaded
-            isLoading = false  // Done loading
-        }
-        
-    }
+//    func getResources() {
+//        isLoading = true
+//        Task {
+//            do {
+//                resources = try await NetworkManager.shared.getData()
+//            } catch {
+//                if let apError = error as? RFError {
+//                    switch apError {
+//                        
+//                    case .invalidURL:
+//                        alertItem = AlertContext.invalidURL
+//                    case .invalidResponse:
+//                        alertItem = AlertContext.invalidResponse
+//                    case .invalidData:
+//                        alertItem = AlertContext.invalidData
+//                    case .unableToComplete:
+//                        alertItem = AlertContext.unableToComplete
+//                    }
+//                    
+//                } else {
+//                    alertItem = AlertContext.invalidResponse
+//                }
+//                alertItem = AlertContext.invalidResponse
+//                isLoading = false
+//            }
+//            fetchCoordinates() // Fetch coordinates after resources are loaded
+//            isLoading = false  // Done loading
+//        }
+//        
+//    }
     
     
     func fetchCoordinates() {

@@ -18,36 +18,69 @@ final class NetworkManager {
     
     private init() {}
     
-    func getData() async throws -> [Record] {
-        guard let url = URL(string: baseURL) else {
-            throw APError.invalidURL
+    func getData(offset: String? = nil) async throws -> (records: [Record], nextOffset: String?) {
+            // Construct the URL with offset if provided
+            var urlString = baseURL
+            if let offset = offset {
+                urlString += "?offset=\(offset)"
+            }
+
+            guard let url = URL(string: urlString) else {
+                throw RFError.invalidURL
+            }
+
+            var request = URLRequest(url: url)
+            request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
+            request.httpMethod = "GET"
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                throw RFError.invalidResponse
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let communityResourceModel = try decoder.decode(CommunityResourceModel.self, from: data)
+                let nextOffset = communityResourceModel.offset // Airtable might provide the next offset
+                return (communityResourceModel.records, nextOffset)
+            } catch {
+                throw RFError.invalidData // More specific error for decoding issues
+            }
         }
-        
-        var request = URLRequest(url: url) // Create a mutable request
-        request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        if let httpResponse = response as? HTTPURLResponse {
-            print("Status Code: \(httpResponse.statusCode)")
-            //            if let headers = httpResponse.allHeaderFields as? [String: String] {
-            //                print("Headers: \(headers)")
-            //            }
-        }
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw APError.invalidResponse // Or a more specific error based on the response
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            return try decoder.decode(CommunityResourceModel.self, from: data).records
-        } catch {
-            throw APError.invalidURL // Provide the underlying decoding error
-        }
-    }
+
+    
+    
+//    func getData() async throws -> [Record] {
+//        guard let url = URL(string: baseURL) else {
+//            throw RFError.invalidURL
+//        }
+//        
+//        var request = URLRequest(url: url) // Create a mutable request
+//        request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
+//        request.httpMethod = "GET"
+//        
+//        let (data, response) = try await URLSession.shared.data(for: request)
+//        
+//        if let httpResponse = response as? HTTPURLResponse {
+//            print("Status Code: \(httpResponse.statusCode)")
+////                        if let headers = httpResponse.allHeaderFields as? [String: String] {
+////                            print("Headers: \(headers)")
+////                        }
+//        }
+//        
+//        guard let httpResponse = response as? HTTPURLResponse,
+//              (200...299).contains(httpResponse.statusCode) else {
+//            throw RFError.invalidResponse // Or a more specific error based on the response
+//        }
+//        
+//        do {
+//            let decoder = JSONDecoder()
+//            return try decoder.decode(CommunityResourceModel.self, from: data).records
+//        } catch {
+//            throw RFError.invalidURL // Provide the underlying decoding error
+//        }
+//    }
     
     func downloadImage(fromURLString urlString: String, completed: @escaping (UIImage?) -> Void) {
         

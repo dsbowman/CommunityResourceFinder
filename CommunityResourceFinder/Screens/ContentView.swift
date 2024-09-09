@@ -13,8 +13,6 @@ struct ContentView: View {
     
     @State var selectedTab = 0
     
-    
-    
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -27,8 +25,10 @@ struct ContentView: View {
                     .tag(1)
                     .toolbar(.hidden, for: .tabBar)
             }
-            
-            
+//            .safeAreaInset(edge: .bottom) {
+//                TabViewControl()
+//            }
+
             HStack{
                 ForEach((TabbedItems.allCases), id: \.self){ item in
                     Button{

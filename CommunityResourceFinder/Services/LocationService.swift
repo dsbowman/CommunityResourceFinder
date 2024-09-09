@@ -47,6 +47,9 @@ import MapKit
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+     
+     
+     
 
 
     

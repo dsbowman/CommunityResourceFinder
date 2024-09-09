@@ -12,15 +12,6 @@ struct TileView: View {
     @StateObject var viewModel = ListViewModel()
     var sideMenu = false
     
-//    init() {
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithTransparentBackground()
-//        appearance.backgroundColor = UIColor(Color.white.opacity(0.8))
-//        UINavigationBar.appearance().standardAppearance = appearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//        }
-    
-    
     var body: some View {
         ZStack {
             NavigationStack {

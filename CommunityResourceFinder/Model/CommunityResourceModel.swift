@@ -12,6 +12,7 @@ import MapKit
 // MARK: - CommunityResourceModel
 struct CommunityResourceModel: Decodable  {
     var records: [Record]
+    var offset: String?
 }
 
 // MARK: - Record

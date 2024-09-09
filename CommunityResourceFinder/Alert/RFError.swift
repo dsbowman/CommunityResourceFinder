@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APError: Error {
+enum RFError: Error {
     case invalidURL
     case invalidResponse
     case invalidData

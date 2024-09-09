@@ -15,70 +15,18 @@ struct DetailView: View {
     @State private var position = MapCameraPosition.region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: 39.9526, longitude: -75.1652),
-                span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             )
         )
     
     @State var showWebView = false
     
-    
     var body: some View {
         VStack {
-            VStack(alignment: .center) {
-                if let imageUrl = apiData.logo?.first?.url, let _ = URL(string: imageUrl) {
-                    VStack() {
-                        AsyncImage(url: URL(string: imageUrl)) { image in
-                            image.resizable()
-                        } placeholder: {
-                            ProgressView()
-                                .controlSize(.large)
-                        }
-                            .aspectRatio(contentMode: .fit)
-                            .padding(20)
-                            .frame(width: 350, height: 150)
-                            .background(.white)
-                            .cornerRadius(20)
-                        
-                        HStack {
-                            Text(apiData.label)
-                                .foregroundStyle(.primary)
-                                .multilineTextAlignment(.leading)
-                                .fontWeight(.semibold)
-//                            Spacer()
-    //                        Image(systemName: "heart")
-                        }
-                        .padding(5)
-                        
-                    }
-                    .frame(width: 350)
-                } else {
-                    VStack(alignment: .center) {
-                            Text(apiData.label)
-                                .font(.title)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color.primary)
-                                .multilineTextAlignment(.center)
-                                .padding(20)
-    
-                        
-                    }
-                }
-            }
+            DetailViewHeader(headerData: apiData)
             Spacer().frame(height: 10)
             ContactMenu(phone: apiData.phoneContact, emergency: apiData.emergencyAssistanceNumber, email: apiData.email, street1: apiData.street1, street2: apiData.street2, city: apiData.city, state: apiData.state, url: apiData.url)
-//            HStack {
-//                if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
-//                    ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)
-//                }
-//                
-//                if let phoneContact = apiData.phoneContact {
-//                    ContactButton(label: "Call", image: "phone.fill", imageColor: Color.blue, action: "tel:\(phoneContact)", state: false)
-//                }
-//                
-//                if let street1 = apiData.street1, let city = apiData.city, let state = apiData.state, let zip = apiData.zip {
-//                    ContactButton(label: "Directions", image: "map.fill", imageColor: Color.blue, action:"http://maps.apple.com/?address=\(street1),\(city),\(state),\(zip)", state: false)
-//                }
-//            }
+
         }
         .padding(.bottom, 15)
         
@@ -204,30 +152,55 @@ struct DetailView: View {
     
 }
 
-struct DetailHeaderView: View {
-    
-    var apiData: Fields
-    
-    var body: some View {
-        largeTile(label: apiData.label, imageUrl: apiData.logo?.first?.url ?? "")
-        HStack {
-            if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
-                ContactButton(label: "Emergency", image: "asterisk", imageColor: Color.red, action: "tel:\(emergencyAssistanceNumber)", state: false)
-            }
-            
-            if let phoneContact = apiData.phoneContact {
-                ContactButton(label: "Call", image: "phone.fill", imageColor: Color.blue, action: "tel:\(phoneContact)", state: false)
-            }
-            
-            if let street1 = apiData.street1, let city = apiData.city, let state = apiData.state {
-                ContactButton(label: "Directions", image: "map.fill", imageColor: Color.blue, action:"http://maps.apple.com/?address=\(street1),\(apiData.street2 ?? ""),\(city),\(state),\(apiData.zip ?? "")", state: false)
-            }
-        }
-    }
-}
-
-
 #Preview {
     DetailView(apiData: MockData.sampleResource)
 }
 
+
+struct DetailViewHeader: View {
+    
+    var headerData: Fields
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            if let imageUrl = headerData.logo?.first?.url, let _ = URL(string: imageUrl) {
+                VStack() {
+                    AsyncImage(url: URL(string: imageUrl)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                            .controlSize(.large)
+                    }
+                    .aspectRatio(contentMode: .fit)
+                    .padding(20)
+                    .frame(width: 350, height: 150)
+                    .background(.white)
+                    .cornerRadius(20)
+                    
+                    HStack {
+                        Text(headerData.label)
+                            .foregroundStyle(.primary)
+                            .multilineTextAlignment(.leading)
+                            .fontWeight(.semibold)
+                        //                            Spacer()
+                        //                        Image(systemName: "heart")
+                    }
+                    .padding(5)
+                    
+                }
+                .frame(width: 350)
+            } else {
+                VStack(alignment: .center) {
+                    Text(headerData.label)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.primary)
+                        .multilineTextAlignment(.center)
+                        .padding(20)
+                    
+                    
+                }
+            }
+        }
+    }
+}

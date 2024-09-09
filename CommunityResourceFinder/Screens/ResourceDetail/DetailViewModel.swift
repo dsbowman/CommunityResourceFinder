@@ -13,6 +13,12 @@ import CoreLocation
 class DetailViewModel: ObservableObject {
     
     @Published var isShowingIssueForm = false
+    @Published var position = MapCameraPosition.region(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: 39.9526, longitude: -75.1652),
+                span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+            )
+        )
     
 //    @Published var alertItem: AlertItem?
 //    @Published var isLoading = true

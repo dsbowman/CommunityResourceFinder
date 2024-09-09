@@ -104,5 +104,5 @@ class ContactControl {
 
 
 #Preview {
-    ContactControl.website(url: "dekebowman.smugmug.com") as any View
+    ContactControl() as! any View
 }

@@ -22,6 +22,9 @@ import CoreLocation
     @Published var isSheetPresented = true
     @Published var mapRegion: MKCoordinateRegion? = nil // Make it optional
     private let locationManager = CLLocationManager() // Add location manager
+    private var currentOffset: String? = nil
+    private var hasMoreData = true
+    private var isFetchingData = false // Prevent multiple concurrent fetches
     let columns: [GridItem] = [GridItem(.adaptive(minimum: 350))]
     
     var approvedResources: [Record] {
@@ -40,40 +43,55 @@ import CoreLocation
 
     
     func getResources() {
+        guard !isFetchingData && hasMoreData else { return }
+        
         isLoading = true
+        isFetchingData = true
+        
         Task {
             do {
-                resources = try await NetworkManager.shared.getData()
+                let (newResources, nextOffset) = try await NetworkManager.shared.getData(offset: currentOffset)
+                
+                resources.append(contentsOf: newResources)
+                currentOffset = nextOffset
+                hasMoreData = nextOffset != nil
+                
+                fetchCoordinates(for: newResources)
+                
             } catch {
-                if let apError = error as? APError {
-                    switch apError {
-                        
-                    case .invalidURL:
-                        alertItem = AlertContext.invalidURL
-                    case .invalidResponse:
-                        alertItem = AlertContext.invalidResponse
-                    case .invalidData:
-                        alertItem = AlertContext.invalidData
-                    case .unableToComplete:
-                        alertItem = AlertContext.unableToComplete
-                    }
-                    
-                } else {
-                    alertItem = AlertContext.invalidResponse
-                }
-                alertItem = AlertContext.invalidResponse
-                isLoading = false
+                handleNetworkError(error)
             }
-            fetchCoordinates() // Fetch coordinates after resources are loaded
             isLoading = false  // Done loading
+            isFetchingData = false
         }
         
     }
     
     
-    func fetchCoordinates() {
-        for i in 0..<resources.count {
-            let record = resources[i]
+    private func handleNetworkError(_ error: Error) {
+        if let RFError = error as? RFError {
+            switch RFError {
+                
+            case .invalidURL:
+                alertItem = AlertContext.invalidURL
+            case .invalidResponse:
+                alertItem = AlertContext.invalidResponse
+            case .invalidData:
+                alertItem = AlertContext.invalidData
+            case .unableToComplete:
+                alertItem = AlertContext.unableToComplete
+            }
+            
+        } else {
+            alertItem = AlertContext.invalidResponse
+        }
+        isLoading = false
+    }
+    
+    
+    func fetchCoordinates(for newResources: [Record]) {
+        for i in 0..<newResources.count {
+            let record = newResources[i]
             if let street1 = record.fields.street1, let city = record.fields.city, let state = record.fields.state {
                 
                 let address = "\(street1), \(record.fields.street2 ?? ""), \(city), \(state), \(record.fields.zip ?? "")"
@@ -89,6 +107,7 @@ import CoreLocation
 
                         DispatchQueue.main.async { // Update on main thread
                             self.resources[i].fields.locationCoordinate = location.coordinate
+                            self.calculateRegion()
                         }
                     } else {
                         print("No coordinates found for \(address)")
@@ -96,10 +115,10 @@ import CoreLocation
                 }
             }
             
-            DispatchQueue.main.async {
-                self.calculateRegion()
-                self.isLoading = false  // Done loading
-            }
+//            DispatchQueue.main.async {
+//                self.calculateRegion()
+//                self.isLoading = false  // Done loading
+//            }
 
         }
 

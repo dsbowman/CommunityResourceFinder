@@ -14,7 +14,7 @@
 		E10E6AF02C66CCD2004D2A35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10E6AEF2C66CCD2004D2A35 /* Preview Assets.xcassets */; };
 		E10E6AFD2C66CD5D004D2A35 /* CommunityResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AFC2C66CD5D004D2A35 /* CommunityResourceModel.swift */; };
 		E10E6AFF2C66CD92004D2A35 /* NewResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6AFE2C66CD92004D2A35 /* NewResourceModel.swift */; };
-		E10E6B012C66CDE1004D2A35 /* APError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B002C66CDE1004D2A35 /* APError.swift */; };
+		E10E6B012C66CDE1004D2A35 /* RFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B002C66CDE1004D2A35 /* RFError.swift */; };
 		E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B022C66CDF0004D2A35 /* Alert.swift */; };
 		E10E6B052C66CFF1004D2A35 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B042C66CFF1004D2A35 /* NetworkManager.swift */; };
 		E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B062C66D01D004D2A35 /* LocationService.swift */; };
@@ -40,6 +40,7 @@
 		E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */; };
 		E1A647252C8278B50068109E /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A647242C8278B50068109E /* TabbedItems.swift */; };
 		E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */; };
+		E1E424D92C8B340F000DD48D /* TabViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E424D82C8B340F000DD48D /* TabViewControl.swift */; };
 		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +53,7 @@
 		E10E6AEF2C66CCD2004D2A35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E10E6AFC2C66CD5D004D2A35 /* CommunityResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityResourceModel.swift; sourceTree = "<group>"; };
 		E10E6AFE2C66CD92004D2A35 /* NewResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewResourceModel.swift; sourceTree = "<group>"; };
-		E10E6B002C66CDE1004D2A35 /* APError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APError.swift; sourceTree = "<group>"; };
+		E10E6B002C66CDE1004D2A35 /* RFError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFError.swift; sourceTree = "<group>"; };
 		E10E6B022C66CDF0004D2A35 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E10E6B042C66CFF1004D2A35 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E10E6B062C66D01D004D2A35 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
+		E1E424D82C8B340F000DD48D /* TabViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewControl.swift; sourceTree = "<group>"; };
 		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,9 +119,9 @@
 				E10E6AF72C66CD0E004D2A35 /* Alert */,
 				E1A647232C8278940068109E /* Extensions */,
 				E10E6AF82C66CD15004D2A35 /* Services */,
-				E10E6AF92C66CD1B004D2A35 /* View */,
 				E10E6AFB2C66CD2D004D2A35 /* Controls */,
 				E10E6AFA2C66CD23004D2A35 /* Screens */,
+				E10E6AF92C66CD1B004D2A35 /* View */,
 				E10E6AE82C66CCD1004D2A35 /* CommunityResourceFinderApp.swift */,
 				E10E6AEC2C66CCD2004D2A35 /* Assets.xcassets */,
 				E10E6AEE2C66CCD2004D2A35 /* Preview Content */,
@@ -147,7 +149,7 @@
 		E10E6AF72C66CD0E004D2A35 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				E10E6B002C66CDE1004D2A35 /* APError.swift */,
+				E10E6B002C66CDE1004D2A35 /* RFError.swift */,
 				E10E6B022C66CDF0004D2A35 /* Alert.swift */,
 			);
 			path = Alert;
@@ -194,6 +196,7 @@
 				E10E6B102C66D0D1004D2A35 /* CategoryListTile.swift */,
 				E10E6B122C66FA40004D2A35 /* Header.swift */,
 				E1E7216C2C887F8700BC0DEA /* WebView.swift */,
+				E1E424D82C8B340F000DD48D /* TabViewControl.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -346,7 +349,7 @@
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
 				E10E6B0D2C66D091004D2A35 /* LargeTile.swift in Sources */,
 				E10E6B232C66FBB9004D2A35 /* MapView.swift in Sources */,
-				E10E6B012C66CDE1004D2A35 /* APError.swift in Sources */,
+				E10E6B012C66CDE1004D2A35 /* RFError.swift in Sources */,
 				E10E6B292C66FC30004D2A35 /* NewResourceViewModel.swift in Sources */,
 				E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */,
 				E10E6B2B2C66FC4A004D2A35 /* NewResourceView.swift in Sources */,
@@ -372,6 +375,7 @@
 				E10E6B152C66FA6A004D2A35 /* ContactControl.swift in Sources */,
 				E10E6B252C66FBE1004D2A35 /* TileView.swift in Sources */,
 				E10E6B192C66FB28004D2A35 /* ListViewModel.swift in Sources */,
+				E1E424D92C8B340F000DD48D /* TabViewControl.swift in Sources */,
 				E10E6B272C66FC0B004D2A35 /* ResyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
