@@ -103,6 +103,6 @@ class ContactControl {
 }
 
 
-#Preview {
-    ContactControl() as! any View
-}
+//#Preview {
+//    ContactControl.email(data: "dsbowman@gmail.com") as! any View
+//}
