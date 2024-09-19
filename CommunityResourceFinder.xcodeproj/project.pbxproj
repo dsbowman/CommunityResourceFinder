@@ -43,6 +43,7 @@
 		E1E424D92C8B340F000DD48D /* TabViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E424D82C8B340F000DD48D /* TabViewControl.swift */; };
 		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 		E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */; };
+		E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3042C9C749A00373567 /* MapDetailControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		E1E424D82C8B340F000DD48D /* TabViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewControl.swift; sourceTree = "<group>"; };
 		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewHeader.swift; sourceTree = "<group>"; };
+		E1EAF3042C9C749A00373567 /* MapDetailControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 				E10E6B1C2C66FB60004D2A35 /* DetailViewModel.swift */,
 				E10E6B1E2C66FB7B004D2A35 /* DetailView.swift */,
 				E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */,
+				E1EAF3042C9C749A00373567 /* MapDetailControl.swift */,
 			);
 			path = ResourceDetail;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
 				E10E6B0D2C66D091004D2A35 /* LargeTile.swift in Sources */,
 				E10E6B232C66FBB9004D2A35 /* MapView.swift in Sources */,
+				E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */,
 				E10E6B012C66CDE1004D2A35 /* RFError.swift in Sources */,
 				E10E6B292C66FC30004D2A35 /* NewResourceViewModel.swift in Sources */,
 				E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */,
