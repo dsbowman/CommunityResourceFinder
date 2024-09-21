@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailViewHeader: View {
     
     var headerData: Fields
+    @State private var headerHeight: CGFloat = 200
     
     var body: some View {
         VStack(alignment: .center) {
@@ -24,21 +25,16 @@ struct DetailViewHeader: View {
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
                     .frame(width: 350, height: 150)
-                    .background(.white)
-                    .cornerRadius(20)
-                    
                     HStack {
                         Text(headerData.label)
+                            .font(.title2)
                             .foregroundStyle(.primary)
                             .multilineTextAlignment(.leading)
                             .fontWeight(.semibold)
-                        //                            Spacer()
-                        //                        Image(systemName: "heart")
                     }
-                    .padding(5)
-                    
                 }
-                .frame(width: 350)
+                .background(.white)
+                
             } else {
                 VStack(alignment: .center) {
                     Text(headerData.label)
@@ -50,8 +46,12 @@ struct DetailViewHeader: View {
                     
                     
                 }
+                .background(.white)
             }
+            ContactMenu(phone: headerData.phoneContact, emergency: headerData.emergencyAssistanceNumber, email: headerData.email, street1: headerData.street1, street2: headerData.street2, city: headerData.city, state: headerData.state, url: headerData.url)
         }
+        .containerRelativeFrame(.horizontal)
+        .background(.white)
     }
 }
 

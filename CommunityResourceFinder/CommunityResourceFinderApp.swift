@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 @main
 struct ResourceFinderApp: App {
+
+
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

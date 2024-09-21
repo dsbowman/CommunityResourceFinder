@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import FirebaseCore
 
 @MainActor class ListViewModel: ObservableObject {
     

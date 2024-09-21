@@ -56,6 +56,7 @@ struct ContactMenu: View {
             }
             
         }
+        .padding(.bottom, 15)
     }
 }
 
