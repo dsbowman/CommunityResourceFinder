@@ -24,6 +24,7 @@ final class NetworkManager {
             }
 
             guard let url = URL(string: urlString) else {
+                print("Invalid URL: \(urlString)")
                 throw RFError.invalidURL
             }
 
@@ -32,8 +33,10 @@ final class NetworkManager {
             request.httpMethod = "GET"
 
             let (data, response) = try await URLSession.shared.data(for: request)
+            print("Response Data: \(data)")
 
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Invalid response received.")
                 throw RFError.invalidResponse
             }
 
@@ -41,6 +44,7 @@ final class NetworkManager {
                 let decoder = JSONDecoder()
                 let communityResourceModel = try decoder.decode(CommunityResourceModel.self, from: data)
                 let nextOffset = communityResourceModel.offset // Airtable might provide the next offset
+                print("Decoded Data: \(communityResourceModel)")
                 return (communityResourceModel.records, nextOffset)
             } catch {
                 throw RFError.invalidData // More specific error for decoding issues
