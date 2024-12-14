@@ -18,7 +18,7 @@ struct AlertContext {
     
     //Mark: Network Alerts
     static let invalidData = AlertItem(title: Text("Server Error"),
-                                   message: Text("The data received from teh server was invalid. Please contact support."),
+                                   message: Text("The data received from the server was invalid. Please contact support."),
                                    dismissButton: .default(Text("Ok")))
     
     static let invalidResponse = AlertItem(title: Text("Server Error"),
