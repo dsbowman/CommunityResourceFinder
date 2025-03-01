@@ -12,7 +12,6 @@ import FirebaseFirestore
 struct TileView: View {
     
     @StateObject var viewModel = ListViewModel()
-    var sideMenu = false
     
     var body: some View {
         ZStack {
@@ -46,13 +45,17 @@ struct TileView: View {
                     .task { viewModel.getResources() }
                     .background(.ultraThinMaterial)
                 }
-                .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
+                .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources") {
+                    
+                }
 //                .searchSuggestions{
 //                    Text("Food").searchCompletion("Food")
 //                    Text("Housing").searchCompletion("Housing")
 //                }
                 .refreshable { viewModel.getResources() }
+                .background(Color("DarkNavy"))
             }
+            
  
         }
         .overlay {
@@ -81,6 +84,9 @@ struct TileView: View {
             WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
                 .presentationDragIndicator(.visible)
         }
+//        .onAppear {
+//            viewModel.testFirestoreConnection()
+//        }
         
     }
     

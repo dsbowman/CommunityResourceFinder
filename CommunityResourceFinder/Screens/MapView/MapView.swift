@@ -13,7 +13,7 @@ import MapKit
 struct MapView: View {
     
     @StateObject private var viewModel = ListViewModel()
-    @State private var settingsDetent = PresentationDetent.height(240)
+    @State private var settingsDetent = PresentationDetent.height(270)
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var automaticPosition = MapCameraPosition.automatic
     @StateObject private var locationServices = LocationService()
@@ -65,9 +65,9 @@ struct MapView: View {
                 }
                 
                 .sheet(isPresented: $viewModel.isShowingDetail) {
-                    Spacer().frame(height: 50)
+//                    Spacer().frame(height: 50).background(Color.white)
                     DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
-                        .presentationDetents([.height(240), .medium, .large], selection: $settingsDetent)
+                        .presentationDetents([.height(270), .medium, .large], selection: $settingsDetent)
                         .presentationDragIndicator(.visible)
                         .presentationBackgroundInteraction(.enabled(upThrough: .medium))
                 }

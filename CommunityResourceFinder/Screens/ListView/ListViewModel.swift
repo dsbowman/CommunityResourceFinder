@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
-import FirebaseCore
+import FirebaseFirestore
 
 @MainActor class ListViewModel: ObservableObject {
     
@@ -28,6 +28,16 @@ import FirebaseCore
     private var isFetchingData = false // Prevent multiple concurrent fetches
     let columns: [GridItem] = [GridItem(.adaptive(minimum: 350))]
     
+    //Firestore integration variables
+    
+    // Store our Firestore listener so we can detach it when needed
+    private var listener: ListenerRegistration?
+    
+    // Inistialize Firestore database reference
+    
+    private let db = Firestore.firestore()
+    
+    
     var approvedResources: [Record] {
         resources.filter { $0.fields.status == "Active"}
     }
@@ -40,6 +50,92 @@ import FirebaseCore
         }
     }
     
+    func subscribeToResources() {
+        // Start loading
+        isLoading = true
+        
+        // create  query for resource collection
+        
+        let query = db.collection("resources")
+            .whereField("Status", isEqualTo: "Active")
+            .order(by: "Label")
+        
+        
+        //Set up real-tie listener
+        listener = query.addSnapshotListener { [weak self] querySnapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                self.handleFirestoreError(error)
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                self.alertItem = AlertContext.invalidData
+                return
+            }
+            
+            // Transform FIrestore documents into Record Model
+            
+            self.resources = documents.compactMap { document -> Record? in
+                do {
+                    let data = document.data()
+                    
+                    let fields = Fields(
+                        descriptionNotes: data["descriptionNotes"] as? String,
+                        tags: data["tags"] as? [String],
+                        logo: nil, label: data["label"] as? String ?? "",
+                        street1: data["street1"] as? String,
+                        street2: data["street2"] as? String,
+                        status: data["status"] as? String ?? "Inactive",
+                        state: data["state"] as? String,
+                        zip: data["zip"] as? String,
+                        city: data["city"] as? String  // Handle logo separately if needed
+                    )
+                    
+                    return Record(id: document.documentID, fields: fields)
+                    
+                } catch {
+                    print("Error decoding document: \(error)")
+                    return nil
+                    
+                }
+            }
+            
+            // After loading data, fetch coordinates
+           self.fetchCoordinates(for: self.resources)
+           self.isLoading = false
+            
+        }
+    }
+    
+    private func handleFirestoreError(_ error: Error) {
+        print("Firestore error: \(error.localizedDescription)")
+        alertItem = AlertContext.unableToComplete
+        isLoading = false
+    }
+    
+    // Clean up listener when view model is deallocated
+    deinit {
+        listener?.remove()
+    }
+    
+    
+    func testFirestoreConnection() {
+        let db = Firestore.firestore()
+        
+        db.collection("resources").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching test data: \(error)")
+                
+            } else if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    print("Test Record ID: \(document.documentID), Data: \(document.data())")
+                }
+            }
+            
+        }
+    }
 
 
     

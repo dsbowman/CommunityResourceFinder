@@ -11,6 +11,7 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private let cache = NSCache<NSString, UIImage>()
     
+    private var database = "CommunityResources"
     private let baseURL = "https://api.airtable.com/v0/appG874fGad8U9K7y/CommunityResources"
     private let authorizationToken = "Bearer pat9oBQHMYP0D8ZqG.6a33616f8677ee3534fc7c6e45dced6f1b3f42690446b31abcaff961c852ce6f"
     
@@ -22,6 +23,8 @@ final class NetworkManager {
             if let offset = offset {
                 urlString += "?offset=\(offset)"
             }
+        
+//            print("[DEBUG] Constructed URL: \(urlString)")
 
             guard let url = URL(string: urlString) else {
                 print("Invalid URL: \(urlString)")
@@ -31,12 +34,22 @@ final class NetworkManager {
             var request = URLRequest(url: url)
             request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
             request.httpMethod = "GET"
+//            print("[DEBUG] Request Headers: \(request.allHTTPHeaderFields ?? [:])")
 
             let (data, response) = try await URLSession.shared.data(for: request)
             print("Response Data: \(data)")
+        
+//            if let rawJSON = String(data: data, encoding: .utf8) {
+//                    print("[DEBUG] Raw Response JSON: \(rawJSON)")
+//                } else {
+//                    print("[DEBUG] Unable to decode raw response data to UTF-8")
+//                }
+
+//            print("[DEBUG] Response Data Size: \(data.count) bytes")
+
 
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Invalid response received.")
+//                print("[ERROR] Invalid HTTP Response Status Code")
                 throw RFError.invalidResponse
             }
 
@@ -44,9 +57,10 @@ final class NetworkManager {
                 let decoder = JSONDecoder()
                 let communityResourceModel = try decoder.decode(CommunityResourceModel.self, from: data)
                 let nextOffset = communityResourceModel.offset // Airtable might provide the next offset
-                print("Decoded Data: \(communityResourceModel)")
+//                print("Decoded Data: \(communityResourceModel)")
                 return (communityResourceModel.records, nextOffset)
             } catch {
+//                print("[ERROR] Decoding error: \(error)")
                 throw RFError.invalidData // More specific error for decoding issues
             }
         }

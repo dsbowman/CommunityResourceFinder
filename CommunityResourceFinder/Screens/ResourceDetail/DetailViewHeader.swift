@@ -33,7 +33,7 @@ struct DetailViewHeader: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .background(.white)
+//                .background(.white)
                 
             } else {
                 VStack(alignment: .center) {
@@ -46,12 +46,12 @@ struct DetailViewHeader: View {
                     
                     
                 }
-                .background(.white)
+//                .background(.white)
             }
             ContactMenu(phone: headerData.phoneContact, emergency: headerData.emergencyAssistanceNumber, email: headerData.email, street1: headerData.street1, street2: headerData.street2, city: headerData.city, state: headerData.state, url: headerData.url)
         }
         .containerRelativeFrame(.horizontal)
-        .background(.white)
+//        .background(.white)
     }
 }
 

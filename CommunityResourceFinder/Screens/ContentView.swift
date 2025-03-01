@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @State var selectedTab = 0
     
+        
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -23,6 +24,10 @@ struct ContentView: View {
                     
                 MapView()
                     .tag(1)
+                    .toolbar(.hidden, for: .tabBar)
+                
+                MigrationView()
+                    .tag(2)
                     .toolbar(.hidden, for: .tabBar)
             }
 //            .safeAreaInset(edge: .bottom) {
@@ -47,6 +52,9 @@ struct ContentView: View {
 
         }
         .accentColor(.teal)
+        
+        
+        
     }
 }
 
