@@ -56,7 +56,7 @@ extension Resource {
         try validateRequiredFields(record.fields)
         
         // Create the location
-        let location = try Location(
+        let location = Location(
             id: nil,
             label: "Main Location",
             street1: record.fields.street1,
@@ -110,12 +110,15 @@ extension Resource {
             ))
         }
         
+        let logoURL = record.fields.logo?.first?.url
+        
         return Resource(
             id: nil,
             label: record.fields.label,
             description: record.fields.descriptionNotes,
             type: determineResourceType(record.fields),
             url: record.fields.url,
+            logoUrl: logoURL,
             tags: record.fields.tags,
             mainPhone: formatPhoneNumber(record.fields.phoneContact),
             emergencyPhone: formatPhoneNumber(record.fields.emergencyAssistanceNumber),
@@ -193,7 +196,7 @@ extension Resource {
     private static func findClosestMatch(for tag: String, in validTags: Set<String>) -> String? {
         // Convert everything to lowercase for comparison
         let lowercaseTag = tag.lowercased()
-        let lowercaseValidTags = validTags.map { $0.lowercased() }
+        _ = validTags.map { $0.lowercased() }
         
         // First check for contains relationship
         if let containsMatch = validTags.first(where: {
@@ -220,7 +223,7 @@ extension Resource {
     
     
     private static func parseHoursOfOperation(_ hoursString: String?) -> [HoursOfOperation] {
-        guard let hours = hoursString else { return [] }
+        guard hoursString != nil else { return [] }
         
         // Create a default structure
         let defaultHours = HoursOfOperation(days: [

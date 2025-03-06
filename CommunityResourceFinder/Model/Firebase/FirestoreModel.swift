@@ -14,6 +14,7 @@ struct Resource: Identifiable, Codable {
     var description: String?
     var type: ResourceType
     var url: String?
+    var logoUrl: String?
     var tags: [String]?
     // Organization-level contact information
     var mainPhone: String?

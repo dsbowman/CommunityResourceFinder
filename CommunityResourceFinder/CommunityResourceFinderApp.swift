@@ -16,13 +16,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Then configure App Check with the right provider for the environment
         #if DEBUG
-        // Use debug provider for simulator and development
+        print("Using App Check Debug Provider")
+        let debugToken = UserDefaults.standard.string(forKey: "AppCheckDebugToken") ?? UUID().uuidString
+        UserDefaults.standard.set(debugToken, forKey: "AppCheckDeubgToken")
+        print("App Check debug token: \(debugToken)")
         let providerFactory = AppCheckDebugProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
+        
         #else
-        // Use DeviceCheck provider for release builds
+        print("Using DeviceCheckProvider")
         let providerFactory = DeviceCheckProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
+
         #endif
         
         return true

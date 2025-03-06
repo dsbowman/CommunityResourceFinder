@@ -15,6 +15,8 @@ actor ImageMigrationService {
     
     private let storage = Storage.storage()
     private let cache = NSCache<NSString, UIImage>()
+    private let appTestDebugToken = "A7E0279E-7BD3-4FDB-B479-824A118E32E8"
+    
     
     private init() {}
     
@@ -63,25 +65,82 @@ actor ImageMigrationService {
         var results: [String: ImageMigrationResult] = [:]
         let total = Double(resources.count)
         
-        for (index, resource) in resources.enumerated() {
-            if let logoUrl = resource.fields.logo?.first?.url {
-                do {
-                    let newUrl = try await migrateImage(
-                        from: logoUrl,
-                        resourceId: resource.id
-                    )
-                    results[resource.id] = .success(newUrl)
-                } catch {
-                    results[resource.id] = .failure(error)
+        let batchSize = 5
+        
+        for batchIndex in stride(from: 0, to: resources.count, by: batchSize) {
+            let endIndex = min(batchIndex + batchSize, resources.count)
+            let batch = Array(resources[batchIndex..<endIndex])
+            
+            await withTaskGroup(of: (String, ImageMigrationResult).self) { group in
+                for resource in batch {
+                    if let logoUrl = resource.fields.logo?.first?.url {
+                        group.addTask {
+                            do {
+                                let newUrl = try await self.migrateImageWithRetry(
+                                    from: logoUrl,
+                                    resourceId: resource.id,
+                                    maxRetries: 3
+                                )
+                                return (resource.id, .success(newUrl))
+                            } catch {
+                                return (resource.id, .failure(error))
+                                
+                            }
+                        }
+                    }
+                }
+                for await (resourceId, result) in group {
+                    results[resourceId] = result
                 }
             }
             
-            // Update progress
-            progressUpdate(Double(index + 1) / total)
+            progressUpdate(Double(min(endIndex, resources.count)) / total)
+            
+            if endIndex < resources.count {
+                try? await Task.sleep(nanoseconds: 500_000_000)
+            }
         }
+        
+//        for (index, resource) in resources.enumerated() {
+//            if let logoUrl = resource.fields.logo?.first?.url {
+//                do {
+//                    let newUrl = try await migrateImage(
+//                        from: logoUrl,
+//                        resourceId: resource.id
+//                    )
+//                    results[resource.id] = .success(newUrl)
+//                } catch {
+//                    results[resource.id] = .failure(error)
+//                }
+//            }
+//            
+//            // Update progress
+//            progressUpdate(Double(index + 1) / total)
+//        }
         
         return results
     }
+    
+    private func migrateImageWithRetry(from airtableUrl: String, resourceId: String, maxRetries: Int) async throws -> String {
+        var lastError: Error?
+        
+        for attempt in 1...maxRetries {
+            do {
+                return try await migrateImage(from: airtableUrl, resourceId: resourceId)
+            } catch {
+                lastError = error
+                print("Image migration attempt \(attempt) failed for \(resourceId): \(error.localizedDescription)")
+                
+                // Exponential backoff - wait longer between each retry
+                let delaySeconds = Double(attempt) * 0.5
+                try? await Task.sleep(nanoseconds: UInt64(delaySeconds * 1_000_000_000))
+            }
+        }
+        
+        // If we get here, all retries failed
+        throw lastError ?? ImageMigrationError.uploadFailed
+    }
+    
     
     // Update Firestore with new image URLs
     func updateFirestoreImages(_ results: [String: ImageMigrationResult]) async throws {

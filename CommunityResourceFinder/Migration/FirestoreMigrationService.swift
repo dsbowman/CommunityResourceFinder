@@ -213,6 +213,27 @@ class FirestoreMigrationService {
             }
         }
         
+        currentOperation = "Migrating resource images"
+    addLog("Starting image migration for \(airtableRecords.count) resources")
+        
+        let imageMigrationProcess = { (progress: Double) in
+            
+            self.migrationProgress = 0.7 + (progress * 0.3)
+            self.currentOperation = "Processing resource images: \(Int(progress * 100))%"
+            
+        }
+        
+        do {
+            
+            let imageResults = await ImageMigrationService.shared.migrateImages(resources: airtableRecords, progressUpdate: imageMigrationProcess)
+            
+            addLog("UpdatingFirestore with \(imageResults.count) image migration results")
+            try await ImageMigrationService.shared.updateFirestoreImages(imageResults)
+            addLog("✅ Image migration completed successfully")
+        } catch {
+            addLog("❌ Error migrating images - \(error.localizedDescription)")  
+        }
+        
         migrationProgress = 1.0
         migrationStatus = "Completed"
         currentOperation = "Migration completed"
