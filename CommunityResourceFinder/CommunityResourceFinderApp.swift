@@ -12,7 +12,11 @@ import Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Configure Firebase first
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
+//        
+//        let db = Firestore.firestore()
+//        let settings = db.settings
+//        settings.cacheSettings = CacheSettings(persistenceEnabled: true)
         
         // Then configure App Check with the right provider for the environment
         #if DEBUG
@@ -37,12 +41,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct ResourceFinderApp: App {
+    
+    
     // Register the AppDelegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    // Remove Firebase configuration from init since it's now in AppDelegate
-    init() {
-    }
+
     
     var body: some Scene {
         WindowGroup {
