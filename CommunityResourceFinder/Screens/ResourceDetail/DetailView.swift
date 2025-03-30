@@ -67,19 +67,19 @@ struct DetailView: View {
                     }
 
                     Section {
-                        if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber {
+                        if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber, !emergencyAssistanceNumber.isEmpty {
                             ContactControl.emergerncy(data: emergencyAssistanceNumber)
                         }
-                        if let phoneContact = apiData.phoneContact {
+                        if let phoneContact = apiData.phoneContact, !phoneContact.isEmpty {
                             ContactControl.phone(data: phoneContact)
                         }
-                        if let phoneContact2 = apiData.phoneContact2 {
+                        if let phoneContact2 = apiData.phoneContact2, !phoneContact2.isEmpty {
                             ContactControl.phone(data: phoneContact2)
                         }
-                        if let email = apiData.email {
+                        if let email = apiData.email, !email.isEmpty {
                             ContactControl.email(data: email)
                         }
-                        if let url = apiData.url {
+                        if let url = apiData.url, !url.isEmpty {
                             ContactControl.website(url: url)
                         }
                         MapDetailControl(resourceData: apiData)

@@ -41,8 +41,8 @@ struct ListView: View {
                 }
                 
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
-                .task { viewModel.getResources() }
-                .refreshable { viewModel.getResources() }
+                .task { viewModel.subscribeToResources() }
+                .refreshable { viewModel.subscribeToResources() }
                 
             }
             

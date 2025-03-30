@@ -25,23 +25,25 @@ struct ContactMenu: View {
     
     var body: some View {
         HStack(spacing: 25) {
-            if let emergency = emergency {
+            if let emergency = emergency, !emergency.isEmpty {
                 RoundContactControl.ActionButton(icon: "sos.circle", activeColor: .red, url: "tel:\(emergency)")
             }
             
-            if let phone = phone {
+            if let phone = phone, !phone.isEmpty {
                 RoundContactControl.ActionButton(icon: "phone.fill", url: "tel:\(phone)")
             } else {
                 RoundContactControl.ActionButton(icon: "phone.fill", isDisabled: true)
             }
             
-            if let email = email {
+            if let email = email, !email.isEmpty {
                 RoundContactControl.ActionButton(icon: "envelope.fill", url: "mailto:\(email)")
             } else {
                 RoundContactControl.ActionButton(icon: "envelope.fill", isDisabled: true)
             }
             
-            if let street1 = street1, let city = city, let state = state {
+            if let street1 = street1, !street1.isEmpty,
+               let city = city, !city.isEmpty,
+               let state = state, !state.isEmpty {
                 RoundContactControl.ActionButton(icon: "map.fill", url: "http://maps.apple.com/?address=\(street1), \(street2 ?? ""), \(city), \(state)")
             } else {
                 RoundContactControl.ActionButton(icon: "map.fill", isDisabled: true)
@@ -63,5 +65,4 @@ struct ContactMenu: View {
 #Preview {
     ContactMenu()
 }
-
 

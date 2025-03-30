@@ -42,7 +42,8 @@ struct TileView: View {
                         }
                         
                     }
-                    .task { viewModel.getResources() }
+//                    .task { viewModel.getResources() } // Airtable Call
+                    .task { viewModel.subscribeToResources()} // Firebase call
                     .background(.ultraThinMaterial)
                 }
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources") {
@@ -52,11 +53,15 @@ struct TileView: View {
 //                    Text("Food").searchCompletion("Food")
 //                    Text("Housing").searchCompletion("Housing")
 //                }
-                .refreshable { viewModel.getResources() }
+//                .refreshable { viewModel.getResources() } // AirTable Call
+                .refreshable { viewModel.subscribeToResources()} //Firebase Call
                 .background(Color("DarkNavy"))
             }
             
  
+        }
+        .onAppear {
+            print("View appeared - resource count: \(viewModel.resources.count)")
         }
         .overlay {
             if viewModel.filteredResources.isEmpty && viewModel.isLoading {

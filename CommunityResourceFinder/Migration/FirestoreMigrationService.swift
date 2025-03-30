@@ -132,6 +132,8 @@ class FirestoreMigrationService {
             }
         }
         
+        var idMapping: [String: String] = [:]
+        
         // Now process resources and their subcollections
         currentOperation = "Processing resources"
         for (index, record) in airtableRecords.enumerated() {
@@ -142,16 +144,20 @@ class FirestoreMigrationService {
                 let resourceRef = db.collection("resources").document()
                 let resource = try convertToFirestoreResource(from: record)
                 
+                idMapping[record.id] = resourceRef.documentID
+                
                 // Main resource document data (without nested arrays)
                 let resourceData: [String: Any] = [
                     "label": resource.label,
                     "description": resource.description ?? "",
                     "type": resource.type.rawValue,
                     "url": resource.url ?? "",
+                    "logoUrl": resource.logoUrl ?? "",
                     "mainPhone": resource.mainPhone ?? "",
                     "emergencyPhone": resource.emergencyPhone ?? "",
                     "generalEmail": resource.generalEmail ?? "",
                     "status": resource.status.rawValue,
+                    "airtableId": record.id,
                     "createdAt": FieldValue.serverTimestamp()
                 ]
                 
@@ -214,7 +220,7 @@ class FirestoreMigrationService {
         }
         
         currentOperation = "Migrating resource images"
-    addLog("Starting image migration for \(airtableRecords.count) resources")
+        addLog("Starting image migration for \(airtableRecords.count) resources")
         
         let imageMigrationProcess = { (progress: Double) in
             
@@ -225,10 +231,10 @@ class FirestoreMigrationService {
         
         do {
             
-            let imageResults = await ImageMigrationService.shared.migrateImages(resources: airtableRecords, progressUpdate: imageMigrationProcess)
+            let imageResults = await ImageMigrationService.shared.migrateImages(resources: airtableRecords, idMapping: idMapping, progressUpdate: imageMigrationProcess)
             
             addLog("UpdatingFirestore with \(imageResults.count) image migration results")
-            try await ImageMigrationService.shared.updateFirestoreImages(imageResults)
+            try await ImageMigrationService.shared.updateFirestoreImages(imageResults, idMapping: idMapping)
             addLog("✅ Image migration completed successfully")
         } catch {
             addLog("❌ Error migrating images - \(error.localizedDescription)")  
@@ -242,6 +248,8 @@ class FirestoreMigrationService {
     
     private func convertToFirestoreResource(from record: Record) throws -> Resource {
         let fields = record.fields
+        
+        let logoURL = fields.logo?.first?.url
         
         // First, let's handle the location since it contains address information
         let location = Resource.Location(
@@ -278,6 +286,7 @@ class FirestoreMigrationService {
             description: fields.descriptionNotes,
             type: fields.type == .organization ? .organization : .program,
             url: fields.url,
+            logoUrl: logoURL,
             tags: fields.tags,
             mainPhone: formatPhoneNumber(fields.phoneContact),
             emergencyPhone: formatPhoneNumber(fields.emergencyAssistanceNumber),

@@ -61,6 +61,7 @@ actor ImageMigrationService {
     
     // Migrate a batch of images
     func migrateImages(resources: [Record],
+                       idMapping: [String: String],
                       progressUpdate: @escaping (Double) -> Void) async -> [String: ImageMigrationResult] {
         var results: [String: ImageMigrationResult] = [:]
         let total = Double(resources.count)
@@ -143,12 +144,18 @@ actor ImageMigrationService {
     
     
     // Update Firestore with new image URLs
-    func updateFirestoreImages(_ results: [String: ImageMigrationResult]) async throws {
+    func updateFirestoreImages(_ results: [String: ImageMigrationResult], idMapping: [String: String]) async throws {
         let db = Firestore.firestore()
         let batch = db.batch()
         
-        for (resourceId, result) in results {
-            let resourceRef = db.collection("resources").document(resourceId)
+        for (airtableId, result) in results {
+            // Use the mapping to get the Firestore document ID
+            guard let firestoreId = idMapping[airtableId] else {
+                print("Warning: No Firestore ID found for Airtable ID: \(airtableId)")
+                continue
+            }
+            
+            let resourceRef = db.collection("resources").document(firestoreId)
             
             switch result {
             case .success(let newUrl):

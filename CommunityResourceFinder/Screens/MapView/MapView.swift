@@ -13,7 +13,7 @@ import MapKit
 struct MapView: View {
     
     @StateObject private var viewModel = ListViewModel()
-    @State private var settingsDetent = PresentationDetent.height(270)
+    @State private var settingsDetent = PresentationDetent.height(300)
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var automaticPosition = MapCameraPosition.automatic
     @StateObject private var locationServices = LocationService()
@@ -86,8 +86,8 @@ struct MapView: View {
                 
             }
             .task {
-                viewModel.getResources()
-                //                viewModel.fetchCoordinates()
+//                viewModel.getResources()
+                viewModel.subscribeToResources()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
             .navigationTitle("Resources Finder")

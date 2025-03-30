@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import Firebase
+import FirebaseAppCheck
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -45,6 +46,10 @@ struct ResourceFinderApp: App {
     
     // Register the AppDelegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    init() {
+        FirebaseApp.configure()
+    }
 
     
     var body: some Scene {

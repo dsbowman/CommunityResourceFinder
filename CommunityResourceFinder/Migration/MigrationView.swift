@@ -222,21 +222,21 @@ struct MigrationView: View {
         }
     }
     
-    func migrateResourceImages() async throws {
-        let progressHandler = { (progress: Double) in
-            // Update your UI with progress
-            print("Image migration progress: \(Int(progress * 100))%")
-        }
-        
-        // Start the migration
-        let results = await ImageMigrationService.shared.migrateImages(
-            resources: listViewModel.resources,
-            progressUpdate: progressHandler
-        )
-        
-        // Update Firestore with the results
-        try await ImageMigrationService.shared.updateFirestoreImages(results)
-    }
+//    func migrateResourceImages() async throws {
+//        let progressHandler = { (progress: Double) in
+//            // Update your UI with progress
+//            print("Image migration progress: \(Int(progress * 100))%")
+//        }
+//        
+//        // Start the migration
+//        let results = await ImageMigrationService.shared.migrateImages(
+//            resources: listViewModel.resources, idMapping: <#[String : String]#>,
+//            progressUpdate: progressHandler
+//        )
+//        
+//        // Update Firestore with the results
+//        try await ImageMigrationService.shared.updateFirestoreImages(results)
+//    }
     
     
     // Function to test Firebase connection
