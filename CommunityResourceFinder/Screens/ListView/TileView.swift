@@ -42,7 +42,6 @@ struct TileView: View {
                         }
                         
                     }
-//                    .task { viewModel.getResources() } // Airtable Call
                     .task { viewModel.subscribeToResources()} // Firebase call
                     .background(.ultraThinMaterial)
                 }

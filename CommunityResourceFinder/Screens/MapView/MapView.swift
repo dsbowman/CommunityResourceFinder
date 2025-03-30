@@ -86,7 +86,6 @@ struct MapView: View {
                 
             }
             .task {
-//                viewModel.getResources()
                 viewModel.subscribeToResources()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
