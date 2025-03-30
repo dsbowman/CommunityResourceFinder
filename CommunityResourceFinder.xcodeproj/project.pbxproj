@@ -116,6 +116,8 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E14954042D0BA72700E22BDB /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		E149543F2D0DDCFC00E22BDB /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		E149545A2D0DE4D400E22BDB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E15D7C2F2D03A6FC003C85D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
 		E1D859C52D581FCB00458969 /* EXT_Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_Resource.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				E1D859C92D5A461C00458969 /* Migration */,
 				E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */,
 				E123AA442C7E437C0070D9FB /* Info.plist */,
+				E15D7C2F2D03A6FC003C85D1 /* GoogleService-Info.plist */,
 				E10E6AF62C66CD06004D2A35 /* Model */,
 				E10E6AF72C66CD0E004D2A35 /* Alert */,
 				E1A647232C8278940068109E /* Extensions */,
@@ -456,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10E6AF02C66CCD2004D2A35 /* Preview Assets.xcassets in Resources */,
+				E15D7C302D03A6FC003C85D1 /* GoogleService-Info.plist in Resources */,
 				E10E6AED2C66CCD2004D2A35 /* Assets.xcassets in Resources */,
 				E1FFEEC52D248A670042D7D1 /* GoogleService-Info.plist in Resources */,
 			);
@@ -468,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E149545B2D0DE4D400E22BDB /* User.swift in Sources */,
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
 				E14954402D0DDD0D00E22BDB /* FirestoreManager.swift in Sources */,
 				E1FFEEB92D244EB60042D7D1 /* MigrationManager.swift in Sources */,
@@ -490,6 +495,7 @@
 				E1FFEEBD2D246EA60042D7D1 /* MigrationLogView.swift in Sources */,
 				E10E6AFF2C66CD92004D2A35 /* NewResourceModel.swift in Sources */,
 				E10E6B172C66FAB3004D2A35 /* ContactButton.swift in Sources */,
+				E14954102D0BA7D000E22BDB /* Tag.swift in Sources */,
 				E10E6B1D2C66FB60004D2A35 /* DetailViewModel.swift in Sources */,
 				E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */,
 				E10E6B112C66D0D1004D2A35 /* CategoryListTile.swift in Sources */,
@@ -501,6 +507,7 @@
 				E10E6AEB2C66CCD1004D2A35 /* ContentView.swift in Sources */,
 				E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */,
 				E10E6B1F2C66FB7B004D2A35 /* DetailView.swift in Sources */,
+				E149540D2D0BA76D00E22BDB /* Review.swift in Sources */,
 				E10E6B132C66FA40004D2A35 /* Header.swift in Sources */,
 				E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */,
 				E10E6AFD2C66CD5D004D2A35 /* CommunityResourceModel.swift in Sources */,
