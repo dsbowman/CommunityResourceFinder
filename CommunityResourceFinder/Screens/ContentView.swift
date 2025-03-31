@@ -26,9 +26,9 @@ struct ContentView: View {
                     .tag(1)
                     .toolbar(.hidden, for: .tabBar)
                 
-                MigrationView()
-                    .tag(2)
-                    .toolbar(.hidden, for: .tabBar)
+//                MigrationView()
+//                    .tag(2)
+//                    .toolbar(.hidden, for: .tabBar)
             }
 //            .safeAreaInset(edge: .bottom) {
 //                TabViewControl()

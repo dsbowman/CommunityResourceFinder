@@ -8,25 +8,21 @@
 import SwiftUI
 
 struct DetailViewHeader: View {
-    
-    var headerData: Fields
+    var resource: Resource
+//    var headerData: Fields
     @State private var headerHeight: CGFloat = 200
     
     var body: some View {
         VStack(alignment: .center) {
-            if let imageUrl = headerData.logo?.first?.url, let _ = URL(string: imageUrl) {
+            if let id = resource.id, !id.isEmpty {
+                let imagePath = resource.imagePath
+                
                 VStack() {
-                    AsyncImage(url: URL(string: imageUrl)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                            .controlSize(.large)
-                    }
-                    .aspectRatio(contentMode: .fit)
+                    FirebaseImage(path: imagePath)
                     .padding(20)
                     .frame(width: 350, height: 150)
                     HStack {
-                        Text(headerData.label)
+                        Text(resource.label)
                             .font(.title2)
                             .foregroundStyle(.primary)
                             .multilineTextAlignment(.leading)
@@ -37,7 +33,7 @@ struct DetailViewHeader: View {
                 
             } else {
                 VStack(alignment: .center) {
-                    Text(headerData.label)
+                    Text(resource.label)
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.primary)
@@ -48,7 +44,25 @@ struct DetailViewHeader: View {
                 }
 //                .background(.white)
             }
-            ContactMenu(phone: headerData.phoneContact, emergency: headerData.emergencyAssistanceNumber, email: headerData.email, street1: headerData.street1, street2: headerData.street2, city: headerData.city, state: headerData.state, url: headerData.url)
+            
+            if let location = resource.primaryLocation {
+                ContactMenu(
+                    phone: resource.mainPhone,
+                    emergency: resource.emergencyPhone,
+                    email: resource.generalEmail,
+                    street1: location.street1,
+                    street2: location.street2,
+                    city: location.city,
+                    state: location.state,
+                    url: resource.url)
+            } else {
+                ContactMenu(
+                    phone: resource.mainPhone,
+                    emergency: resource.emergencyPhone,
+                    email: resource.generalEmail,
+                    url: resource.url)
+                
+            }
         }
         .containerRelativeFrame(.horizontal)
 //        .background(.white)
@@ -56,6 +70,6 @@ struct DetailViewHeader: View {
 }
 
 
-#Preview {
-    DetailViewHeader(headerData: MockData.sampleResource)
-}
+//#Preview {
+//    DetailViewHeader(headerData: MockData.sampleResource)
+//}

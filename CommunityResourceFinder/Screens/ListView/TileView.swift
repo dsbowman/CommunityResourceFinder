@@ -17,11 +17,11 @@ struct TileView: View {
         ZStack {
             NavigationStack {
                 ScrollView {
-                    LazyVGrid(columns: viewModel.columns, spacing: 30) {ForEach(viewModel.filteredResources.sorted(by: {$0.fields.label < $1.fields.label }), id: \.id) { apiData in
-                        largeTile(label: apiData.fields.label , imageUrl: apiData.fields.logo?.first?.url ?? "", description: apiData.fields.descriptionNotes ?? "")
+                    LazyVGrid(columns: viewModel.columns, spacing: 30) {ForEach(viewModel.filteredResources.sorted(by: {$0.label < $1.label }), id: \.id) { resource in
+                            largeTile(resource: resource)
                                 .accentColor(.primary)
                                 .onTapGesture {
-                                    viewModel.selectedResource = apiData.fields
+                                    viewModel.selectedResource = resource
                                     viewModel.isShowingDetail = true
                                 }
                         }
@@ -42,7 +42,7 @@ struct TileView: View {
                         }
                         
                     }
-                    .task { viewModel.subscribeToResources()} // Firebase call
+                    .task { viewModel.subscribeToResources()}
                     .background(.ultraThinMaterial)
                 }
                 .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources") {
@@ -52,16 +52,15 @@ struct TileView: View {
 //                    Text("Food").searchCompletion("Food")
 //                    Text("Housing").searchCompletion("Housing")
 //                }
-//                .refreshable { viewModel.getResources() } // AirTable Call
-                .refreshable { viewModel.subscribeToResources()} //Firebase Call
+                .refreshable { viewModel.subscribeToResources()}
                 .background(Color("DarkNavy"))
             }
             
  
         }
-        .onAppear {
-            print("View appeared - resource count: \(viewModel.resources.count)")
-        }
+//        .onAppear {
+//            print("View appeared - resource count: \(viewModel.resources.count)")
+//        }
         .overlay {
             if viewModel.filteredResources.isEmpty && viewModel.isLoading {
                 LoadingView()
@@ -76,9 +75,11 @@ struct TileView: View {
             
         }
         .sheet(isPresented: $viewModel.isShowingDetail) {
-            Spacer().frame(height: 20)
-            DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
-                .presentationDragIndicator(.visible)
+            if let selectedResource = viewModel.selectedResource {
+                Spacer().frame(height: 20)
+                DetailView(resource: selectedResource)
+                    .presentationDragIndicator(.visible)
+            }
         }
 
         

@@ -24,14 +24,14 @@ struct MapView: View {
         NavigationStack {
             VStack {
                 Map(position: isShowingUserLocation ? $userPosition : $automaticPosition ) {
-                    ForEach(viewModel.filteredResources) { record in
-                        if let coordinate = record.fields.locationCoordinate {
-                            Annotation(record.fields.label, coordinate: coordinate) {
+                    ForEach(viewModel.filteredResources) { resource in
+                        if let location = resource.primaryLocation, let coordinate = location.coordinate {
+                            Annotation(resource.label, coordinate: coordinate) {
                                 Circle()
                                     .fill(.teal)
                                     .frame(width: 10, height: 10)
                                     .onTapGesture {
-                                        viewModel.selectedResource = record.fields
+                                        viewModel.selectedResource = resource
                                         viewModel.isShowingDetail = true
                                         
                                     }
@@ -50,8 +50,15 @@ struct MapView: View {
                     // If there's search text, disable user location tracking
                     if !newValue.isEmpty {
                         isShowingUserLocation = false
-                        if (viewModel.filteredResources.first?.fields.locationCoordinate) != nil {
-                            automaticPosition = MapCameraPosition.userLocation(fallback: .automatic)
+                        if let firstResource = viewModel.filteredResources.first,
+                           let location = firstResource.primaryLocation,
+                           let coordinate = location.coordinate {
+                            automaticPosition = MapCameraPosition.region(
+                                MKCoordinateRegion(
+                                    center: coordinate,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                                )
+                            )
                         }
                     } else {
                         isShowingUserLocation = true
@@ -66,10 +73,13 @@ struct MapView: View {
                 
                 .sheet(isPresented: $viewModel.isShowingDetail) {
 //                    Spacer().frame(height: 50).background(Color.white)
-                    DetailView(apiData: viewModel.selectedResource ?? MockData.sampleResource)
-                        .presentationDetents([.height(270), .medium, .large], selection: $settingsDetent)
-                        .presentationDragIndicator(.visible)
-                        .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+                    if let selectedResource = viewModel.selectedResource {
+                        DetailView(resource: selectedResource)
+                            .presentationDetents([.height(270), .medium, .large], selection: $settingsDetent)
+                            .presentationDragIndicator(.visible)
+                            .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+                    }
+                    
                 }
                 //            .sheet(isPresented: $viewModel.isShowingList) {
                 //                TileListView()

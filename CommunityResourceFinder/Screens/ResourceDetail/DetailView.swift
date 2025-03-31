@@ -10,7 +10,7 @@ import MapKit
 import WebKit
 
 struct DetailView: View {
-    var apiData: Fields
+    var resource: Resource
     @StateObject private var viewModel = DetailViewModel()
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -26,7 +26,7 @@ struct DetailView: View {
         GeometryReader { geometry in
             VStack {
                 // Collapsible Header
-                DetailViewHeader(headerData: apiData)
+                DetailViewHeader(resource: resource)
                     .frame(height: headerHeight)
                     .offset(y: geometry.frame(in: .global).minY < 0
                             ? -geometry.frame(in: .global).minY
@@ -42,7 +42,7 @@ struct DetailView: View {
 
                 // Main List content
                 List {
-                    if let description = apiData.descriptionNotes {
+                    if let description = resource.description, !description.isEmpty {
                         Section {
                             VStack(alignment: .leading) {
                                 Text("Description")
@@ -54,36 +54,63 @@ struct DetailView: View {
                             }
                         }
                     }
-                    if let hoursOfOperation = apiData.hoursOfOperation {
-                        Section {
-                            VStack(alignment: .leading) {
-                                Text("Hours of Operation")
-                                    .padding(.bottom, 5)
-                                    .font(.caption)
-                                Text(hoursOfOperation)
-                                    .textSelection(.enabled)
-                            }
-                        }
-                    }
+//                    if let location = resource.primaryLocation, let hours = location.hoursOfOperation?.first {
+//                        Section {
+//                            VStack(alignment: .leading) {
+//                                Text("Hours of Operation")
+//                                    .padding(.bottom, 5)
+//                                    .font(.caption)
+//                                
+//                                ForEach(hours.days) { day in
+//                                    HStack {
+//                                        Text(day.day.rawValue.capitalized)
+//                                            .frame(width: 100, alignment: .leading)
+//                                        
+//                                        if let open = day.open, let close = day.close {
+//                                            Text("\(open) - \(close)")
+//                                        } else {
+//                                            Text("Closed")
+//                                        }
+//                                    }
+//                                }
+//                                .textSelection(.enabled)
+//                            }
+//                        }
+//                    }
 
                     Section {
-                        if let emergencyAssistanceNumber = apiData.emergencyAssistanceNumber, !emergencyAssistanceNumber.isEmpty {
-                            ContactControl.emergerncy(data: emergencyAssistanceNumber)
+                        if let emergencyPhone = resource.emergencyPhone, !emergencyPhone.isEmpty {
+                            ContactControl.emergency(data: emergencyPhone)
                         }
-                        if let phoneContact = apiData.phoneContact, !phoneContact.isEmpty {
-                            ContactControl.phone(data: phoneContact)
+                        if let mainPhone = resource.mainPhone, !mainPhone.isEmpty {
+                            ContactControl.phone(data: mainPhone)
                         }
-                        if let phoneContact2 = apiData.phoneContact2, !phoneContact2.isEmpty {
-                            ContactControl.phone(data: phoneContact2)
+                        if let contact = resource.contacts?.first(where: {$0.role == "secondary"}) {
+                            if let phone = contact.phone, !phone.isEmpty {
+                                ContactControl.phone(data: phone)
+                            }
                         }
-                        if let email = apiData.email, !email.isEmpty {
+                        if let email = resource.generalEmail, !email.isEmpty {
                             ContactControl.email(data: email)
                         }
-                        if let url = apiData.url, !url.isEmpty {
+                        if let url = resource.url, !url.isEmpty {
                             ContactControl.website(url: url)
                         }
-                        MapDetailControl(resourceData: apiData)
-                    }
+                        if let location = resource.primaryLocation,
+                            let coordinate = location.coordinate {
+                                MapDetailControl(
+                                    latitude: coordinate.latitude,
+                                    longitude: coordinate.longitude,
+                                    label: resource.label,
+                                    street1: location.street1,
+                                    street2: location.street2,
+                                    city: location.city,
+                                    state: location.state,
+                                    zip: location.zip
+                                )
+                            }
+                        }
+                        
 
                     Button(action: {
                         viewModel.isShowingIssueForm = true
@@ -104,6 +131,6 @@ struct DetailView: View {
     }
 }
 
-#Preview {
-    DetailView(apiData: MockData.sampleResource)
-}
+//#Preview {
+//    DetailView(apiData: MockData.sampleResource)
+//}

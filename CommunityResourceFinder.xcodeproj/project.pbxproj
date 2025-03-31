@@ -56,6 +56,9 @@
 		E167D7942D73CB8100593970 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = E167D7932D73CB8100593970 /* FirebaseAppCheck */; };
 		E167D7962D73CB8100593970 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E167D7952D73CB8100593970 /* FirebaseStorage */; };
 		E1A647252C8278B50068109E /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A647242C8278B50068109E /* TabbedItems.swift */; };
+		E1B7F1B42D99C8FB00C17337 /* FirebaseImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */; };
+		E1B7F1B62D99CB7800C17337 /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */; };
+		E1B7F1B82D9A028300C17337 /* ResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7F1B72D9A028300C17337 /* ResourceRepository.swift */; };
 		E1BE8D442CA0F4C7002975C8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E1BE8D432CA0F4C7002975C8 /* FirebaseAnalytics */; };
 		E1BE8D462CA0F4C7002975C8 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = E1BE8D452CA0F4C7002975C8 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */; };
@@ -116,9 +119,11 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E14954042D0BA72700E22BDB /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		E149543F2D0DDCFC00E22BDB /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		E149545A2D0DE4D400E22BDB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E15D7C2F2D03A6FC003C85D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
+		E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageService.swift; sourceTree = "<group>"; };
+		E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
+		E1B7F1B72D9A028300C17337 /* ResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepository.swift; sourceTree = "<group>"; };
 		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
 		E1D859C52D581FCB00458969 /* EXT_Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_Resource.swift; sourceTree = "<group>"; };
 		E1D859C72D58270200458969 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
@@ -246,6 +251,8 @@
 				E10E6B042C66CFF1004D2A35 /* NetworkManager.swift */,
 				E10E6B062C66D01D004D2A35 /* LocationService.swift */,
 				E1D859C72D58270200458969 /* GeocodingService.swift */,
+				E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */,
+				E1B7F1B72D9A028300C17337 /* ResourceRepository.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 			children = (
 				E10E6B082C66D04C004D2A35 /* LoadingView.swift */,
 				E10E6B0A2C66D065004D2A35 /* RemoteImageView.swift */,
+				E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,7 +467,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10E6AF02C66CCD2004D2A35 /* Preview Assets.xcassets in Resources */,
-				E15D7C302D03A6FC003C85D1 /* GoogleService-Info.plist in Resources */,
 				E10E6AED2C66CCD2004D2A35 /* Assets.xcassets in Resources */,
 				E1FFEEC52D248A670042D7D1 /* GoogleService-Info.plist in Resources */,
 			);
@@ -472,10 +479,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E149545B2D0DE4D400E22BDB /* User.swift in Sources */,
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
 				E14954402D0DDD0D00E22BDB /* FirestoreManager.swift in Sources */,
 				E1FFEEB92D244EB60042D7D1 /* MigrationManager.swift in Sources */,
+				E1B7F1B82D9A028300C17337 /* ResourceRepository.swift in Sources */,
+				E1B7F1B62D99CB7800C17337 /* FirebaseImage.swift in Sources */,
 				E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */,
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
 				E1FFEEBB2D246E100042D7D1 /* MigrationLogEntry.swift in Sources */,
@@ -489,13 +497,13 @@
 				E10E6B292C66FC30004D2A35 /* NewResourceViewModel.swift in Sources */,
 				E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */,
 				E14954052D0BA72700E22BDB /* FirestoreModel.swift in Sources */,
+				E1B7F1B42D99C8FB00C17337 /* FirebaseImageService.swift in Sources */,
 				E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */,
 				E10E6B2B2C66FC4A004D2A35 /* NewResourceView.swift in Sources */,
 				E1D859C82D58270200458969 /* GeocodingService.swift in Sources */,
 				E1FFEEBD2D246EA60042D7D1 /* MigrationLogView.swift in Sources */,
 				E10E6AFF2C66CD92004D2A35 /* NewResourceModel.swift in Sources */,
 				E10E6B172C66FAB3004D2A35 /* ContactButton.swift in Sources */,
-				E14954102D0BA7D000E22BDB /* Tag.swift in Sources */,
 				E10E6B1D2C66FB60004D2A35 /* DetailViewModel.swift in Sources */,
 				E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */,
 				E10E6B112C66D0D1004D2A35 /* CategoryListTile.swift in Sources */,
@@ -507,7 +515,6 @@
 				E10E6AEB2C66CCD1004D2A35 /* ContentView.swift in Sources */,
 				E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */,
 				E10E6B1F2C66FB7B004D2A35 /* DetailView.swift in Sources */,
-				E149540D2D0BA76D00E22BDB /* Review.swift in Sources */,
 				E10E6B132C66FA40004D2A35 /* Header.swift in Sources */,
 				E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */,
 				E10E6AFD2C66CD5D004D2A35 /* CommunityResourceModel.swift in Sources */,

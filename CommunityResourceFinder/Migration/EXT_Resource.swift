@@ -110,7 +110,7 @@ extension Resource {
             ))
         }
         
-        let logoURL = record.fields.logo?.first?.url
+//        let logoURL = record.fields.logo?.first?.url
         
         return Resource(
             id: nil,
@@ -118,7 +118,7 @@ extension Resource {
             description: record.fields.descriptionNotes,
             type: determineResourceType(record.fields),
             url: record.fields.url,
-            logoUrl: logoURL,
+//            logoUrl: logoURL,
             tags: record.fields.tags,
             mainPhone: formatPhoneNumber(record.fields.phoneContact),
             emergencyPhone: formatPhoneNumber(record.fields.emergencyAssistanceNumber),

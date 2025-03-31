@@ -11,7 +11,7 @@ import SafariServices
 
 class ContactControl {
     
-    struct emergerncy: View {
+    struct emergency: View {
         var data: String
         var label = "Emergency"
         
