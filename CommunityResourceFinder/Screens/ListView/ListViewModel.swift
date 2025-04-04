@@ -23,7 +23,15 @@ import FirebaseFirestore
     @Published var newResource = false
     @Published var isSheetPresented = true
     @Published var mapRegion: MKCoordinateRegion? = nil
+    @Published var showMapView: Bool = false
+    @Published var isLoadingMore = false
+    private var lastDocumentSnapshot: DocumentSnapshot?
+    private let initialBatchSize = 20
+    private let additionalBatchSize = 50
+    @Published var isInitialLoadComplete = false
+    private var hasLoadedFromCache = false
     
+ 
     // MARK: - Private Properties
     private var listener: ListenerRegistration?
     private let db = Firestore.firestore()
@@ -56,16 +64,45 @@ import FirebaseFirestore
     
     // MARK: - Public Methods
     func subscribeToResources() {
-        isLoading = true
+        // Don't show full loading if we've already loaded from cache
+        if !hasLoadedFromCache {
+            isLoading = true
+        }
         
         // Remove any existing listener
         listener?.remove()
         
-        // Query for active resources ordered by label
-        let query = db.collection("resources")
+        // First try to load from cache
+        let initialQuery = db.collection("resources")
             .whereField("status", isEqualTo: "active")
             .order(by: "label")
+            .limit(to: initialBatchSize)
         
+        // Try to load from cache first
+        initialQuery.getDocuments(source: .cache) { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
+            if let snapshot = snapshot, !snapshot.isEmpty {
+                // Process cached documents
+                Task {
+                    do {
+                        self.resources = try await self.loadResourcesWithSubcollections(from: snapshot.documents)
+                        self.hasLoadedFromCache = true
+                        self.isLoading = false
+                        self.isInitialLoadComplete = true
+                        self.calculateMapRegion()
+                    } catch {
+                        print("Error loading from cache: \(error)")
+                    }
+                }
+            }
+            
+            // Set up listener for the initial batch
+            self.setupListener(for: initialQuery)
+        }
+    }
+    
+    private func setupListener(for query: Query) {
         listener = query.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -80,18 +117,113 @@ import FirebaseFirestore
                 return
             }
             
-            // Use a task group to load all resources with their subcollections
+            // Save last document for pagination
+            self.lastDocumentSnapshot = documents.last
+            
+            // Load resources with subcollections
             Task {
                 do {
-                    self.resources = try await self.loadResourcesWithSubcollections(from: documents)
+                    let initialResources = try await self.loadResourcesWithSubcollections(from: documents)
+                    
+                    // Update the UI with initial resources
+                    self.resources = initialResources
                     self.calculateMapRegion()
                     self.isLoading = false
+                    self.isInitialLoadComplete = true
+                    
+                    // Load more resources in the background after a short delay
+                    if documents.count >= self.initialBatchSize {
+                        try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+                        self.loadMoreResources()
+                    }
                 } catch {
                     self.handleFirestoreError(error)
                 }
             }
         }
     }
+
+    func loadMoreResources() {
+        guard !isLoadingMore, let lastDoc = lastDocumentSnapshot else { return }
+        
+        isLoadingMore = true
+        
+        let nextQuery = db.collection("resources")
+            .whereField("status", isEqualTo: "active")
+            .order(by: "label")
+            .limit(to: additionalBatchSize)
+            .start(afterDocument: lastDoc)
+        
+        // Load the next batch
+        Task {
+            do {
+                let additionalDocs = try await nextQuery.getDocuments()
+                if additionalDocs.documents.isEmpty {
+                    isLoadingMore = false
+                    return
+                }
+                
+                // Update last document reference
+                lastDocumentSnapshot = additionalDocs.documents.last
+                
+                // Load resources with subcollections
+                let additionalResources = try await self.loadResourcesWithSubcollections(from: additionalDocs.documents)
+                
+                // Append to existing resources
+                self.resources.append(contentsOf: additionalResources)
+                self.calculateMapRegion()
+                self.isLoadingMore = false
+                
+                // Continue loading more resources if there are more available
+                if additionalDocs.documents.count >= self.additionalBatchSize {
+                    self.loadMoreResources()
+                }
+            } catch {
+                self.isLoadingMore = false
+                print("Error loading more resources: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
+//    func subscribeToResources() {
+//        isLoading = true
+//        
+//        // Remove any existing listener
+//        listener?.remove()
+//        
+//        // Query for active resources ordered by label
+//        let query = db.collection("resources")
+//            .whereField("status", isEqualTo: "active")
+//            .order(by: "label")
+//
+//        listener = query.addSnapshotListener { [weak self] snapshot, error in
+//            guard let self = self else { return }
+//            
+//            if let error = error {
+//                self.handleFirestoreError(error)
+//                return
+//            }
+//            
+//            guard let documents = snapshot?.documents else {
+//                self.alertItem = AlertContext.invalidData
+//                self.isLoading = false
+//                return
+//            }
+//            
+//            // Use a task group to load all resources with their subcollections
+//            Task {
+//                do {
+//                    self.resources = try await self.loadResourcesWithSubcollections(from: documents)
+//                    self.calculateMapRegion()
+//                    self.isLoading = false
+//                } catch {
+//                    self.handleFirestoreError(error)
+//                }
+//            }
+//        }
+//    }
     
     func testFirestoreConnection() {
         Task {

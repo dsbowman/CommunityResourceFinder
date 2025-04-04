@@ -12,12 +12,15 @@ import FirebaseAppCheck
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Configure Firebase first
-//        FirebaseApp.configure()
-//        
-//        let db = Firestore.firestore()
-//        let settings = db.settings
-//        settings.cacheSettings = CacheSettings(persistenceEnabled: true)
+        FirebaseApp.configure()
+   
+        let db = Firestore.firestore()
+        let settings = FirestoreSettings()
+        
+        settings.cacheSettings = PersistentCacheSettings(sizeBytes: FirestoreCacheSizeUnlimited as NSNumber)
+        
+        db.settings = settings
+        
         
         // Then configure App Check with the right provider for the environment
         #if DEBUG
@@ -47,9 +50,9 @@ struct ResourceFinderApp: App {
     // Register the AppDelegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    init() {
-        FirebaseApp.configure()
-    }
+//    init() {
+//        FirebaseApp.configure()
+//    }
 
     
     var body: some Scene {

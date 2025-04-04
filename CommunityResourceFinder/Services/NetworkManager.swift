@@ -38,14 +38,7 @@ final class NetworkManager {
 
             let (data, response) = try await URLSession.shared.data(for: request)
             print("Response Data: \(data)")
-        
-//            if let rawJSON = String(data: data, encoding: .utf8) {
-//                    print("[DEBUG] Raw Response JSON: \(rawJSON)")
-//                } else {
-//                    print("[DEBUG] Unable to decode raw response data to UTF-8")
-//                }
-
-//            print("[DEBUG] Response Data Size: \(data.count) bytes")
+    
 
 
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {

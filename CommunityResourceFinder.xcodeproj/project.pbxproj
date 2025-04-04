@@ -119,7 +119,6 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E14954042D0BA72700E22BDB /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		E149543F2D0DDCFC00E22BDB /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		E15D7C2F2D03A6FC003C85D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageService.swift; sourceTree = "<group>"; };
 		E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
@@ -200,7 +199,6 @@
 				E1D859C92D5A461C00458969 /* Migration */,
 				E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */,
 				E123AA442C7E437C0070D9FB /* Info.plist */,
-				E15D7C2F2D03A6FC003C85D1 /* GoogleService-Info.plist */,
 				E10E6AF62C66CD06004D2A35 /* Model */,
 				E10E6AF72C66CD0E004D2A35 /* Alert */,
 				E1A647232C8278940068109E /* Extensions */,

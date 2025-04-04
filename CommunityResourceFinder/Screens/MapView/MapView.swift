@@ -101,16 +101,16 @@ struct MapView: View {
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
             .navigationTitle("Resources Finder")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Button {
-                    viewModel.newResource = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                        .fontWeight(.semibold)
-                        .tint(.teal)
-                }
-            }
+//            .toolbar {
+//                Button {
+//                    viewModel.newResource = true
+//                } label: {
+//                    Image(systemName: "plus.circle.fill")
+//                        .imageScale(.large)
+//                        .fontWeight(.semibold)
+//                        .tint(.teal)
+//                }
+//            }
         }
     }
 }
