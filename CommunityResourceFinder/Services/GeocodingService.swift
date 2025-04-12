@@ -69,7 +69,7 @@ actor GeocodingService {
         let total = Double(locations.count)
         
         // Process locations in smaller batches to manage rate limiting
-        let batchSize = 10
+        let batchSize = 20
         for batch in stride(from: 0, to: locations.count, by: batchSize) {
             let end = min(batch + batchSize, locations.count)
             let currentBatch = Array(locations[batch..<end])

@@ -12,10 +12,15 @@ import MapKit
 
 struct MapView: View {
     
-    @StateObject private var viewModel = ListViewModel()
+    @ObservedObject var viewModel = ListViewModel()
     @State private var settingsDetent = PresentationDetent.height(300)
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
-    @State private var automaticPosition = MapCameraPosition.automatic
+    @State private var automaticPosition = MapCameraPosition.region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 39.9526, longitude: -75.1652),
+            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            )
+    )
     @StateObject private var locationServices = LocationService()
     @State private var isShowingUserLocation = true
     
@@ -31,9 +36,7 @@ struct MapView: View {
                                     .fill(.teal)
                                     .frame(width: 10, height: 10)
                                     .onTapGesture {
-                                        viewModel.selectedResource = resource
-                                        viewModel.isShowingDetail = true
-                                        
+                                        viewModel.activeSheet = .resourceDetail(resource)
                                     }
                                     .frame(width: 30, height: 30)
                             }
@@ -71,52 +74,36 @@ struct MapView: View {
                     MapUserLocationButton()
                 }
                 
-                .sheet(isPresented: $viewModel.isShowingDetail) {
-//                    Spacer().frame(height: 50).background(Color.white)
-                    if let selectedResource = viewModel.selectedResource {
-                        DetailView(resource: selectedResource)
+                .sheet(item: $viewModel.activeSheet) { sheetType in
+                    switch sheetType {
+                    case .resourceDetail(let resource):
+                        DetailView(resource: resource)
                             .presentationDetents([.height(270), .medium, .large], selection: $settingsDetent)
                             .presentationDragIndicator(.visible)
                             .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                    }
                     
-                }
-                //            .sheet(isPresented: $viewModel.isShowingList) {
-                //                TileListView()
-                //                    .presentationDetents([.height(300), .medium, .large], selection: $settingsDetent)
-                //                    .presentationDragIndicator(.visible)
-                //                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
-                //                    .presentationContentInteraction(.scrolls)
-                //            }
-                .sheet(isPresented: $viewModel.newResource) {
-                    //            NewResourceView(newResource: $viewModel.newResource)
-                    WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
-                        .presentationDragIndicator(.visible)
+                    case .issueForm:
+                        WebView(url: URL(string:  "https://airtable.com/appG874fGad8U9K7y/pag8d4CoJAscwVHcY/form")!)
+
+                    case .NewResource:
+                        WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
+
+                    case .webView(_):
+                        WebView(url: URL(string: "https://www.resourcefinder.app/") ?? URL(string: "https://www.google.com")!)
+                    }
+
                 }
                 
-            }
-            .task {
-                viewModel.subscribeToResources()
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Resources")
             .navigationTitle("Resources Finder")
             .navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-//                Button {
-//                    viewModel.newResource = true
-//                } label: {
-//                    Image(systemName: "plus.circle.fill")
-//                        .imageScale(.large)
-//                        .fontWeight(.semibold)
-//                        .tint(.teal)
-//                }
-//            }
         }
     }
 }
 
 
-#Preview {
-    MapView()
-}
+//#Preview {
+//    MapView()
+//}
 

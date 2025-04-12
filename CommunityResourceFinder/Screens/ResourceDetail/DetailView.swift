@@ -118,11 +118,11 @@ struct DetailView: View {
                         Text("Report an issue")
                             .foregroundStyle(.blue)
                     })
-                    .sheet(isPresented: $viewModel.isShowingIssueForm) {
-                        WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/pag8d4CoJAscwVHcY/form")!)
-                            .ignoresSafeArea()
-                            .presentationDragIndicator(.visible)
-                    }
+//                    .sheet(isPresented: $viewModel.isShowingIssueForm) {
+//                        WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/pag8d4CoJAscwVHcY/form")!)
+//                            .ignoresSafeArea()
+//                            .presentationDragIndicator(.visible)
+//                    }
                 }
                 .listStyle(.inset)
             }

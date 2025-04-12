@@ -84,7 +84,7 @@ struct MapDetailControl: View {
         }
     }
 }
-//
+
 //#Preview {
 //    MapDetailControl(resourceData: MockData.sampleResource)
 //}

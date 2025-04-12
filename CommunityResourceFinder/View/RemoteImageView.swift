@@ -26,18 +26,18 @@ final class FirebaseImageLoader: ObservableObject {
     @Published var isLoading = false
     
     func load(fromPath path: String) {
-        isLoading = true
+//        isLoading = true
         
         Task {
             do {
                 let uiImage = try await FirebaseImageService.shared.loadImage(from: path)
                 await MainActor.run {
                     self.image = Image(uiImage: uiImage)
-                    self.isLoading = false
+//                    self.isLoading = false
                 }
             } catch {
                 await MainActor.run {
-                    self.isLoading = false
+//                    self.isLoading = false
                     print("Failed to load image: \(error.localizedDescription)")
                 }
             }
