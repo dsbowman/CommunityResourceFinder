@@ -69,6 +69,7 @@
 		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 		E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */; };
 		E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3042C9C749A00373567 /* MapDetailControl.swift */; };
+		E1F1B14D2DAABDD90029F75B /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = E1F1B14C2DAABDD90029F75B /* FirebasePerformance */; };
 		E1FFEEAE2D2333D00042D7D1 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */; };
 		E1FFEEB12D2334210042D7D1 /* FieldsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB02D2334210042D7D1 /* FieldsValidation.swift */; };
 		E1FFEEB32D2334AB0042D7D1 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB22D2334AB0042D7D1 /* Fields.swift */; };
@@ -165,6 +166,7 @@
 				E15D7C572D03AA91003C85D1 /* FirebaseAnalytics in Frameworks */,
 				E1FFEF1A2D2B2F9B0042D7D1 /* FirebaseStorage in Frameworks */,
 				E167D7962D73CB8100593970 /* FirebaseStorage in Frameworks */,
+				E1F1B14D2DAABDD90029F75B /* FirebasePerformance in Frameworks */,
 				E149541D2D0BAB5900E22BDB /* FirebaseStorage in Frameworks */,
 				E14954172D0BAAD300E22BDB /* FirebaseCrashlytics in Frameworks */,
 				E1FFEEC12D247E8B0042D7D1 /* FirebaseCrashlytics in Frameworks */,
@@ -224,9 +226,7 @@
 		E10E6AF62C66CD06004D2A35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E1FFEEBA2D246E0A0042D7D1 /* MigrationLogEntry.swift */,
 				E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */,
-				E1FFEEB22D2334AB0042D7D1 /* Fields.swift */,
 				E14954112D0BA7EA00E22BDB /* Firebase */,
 				E149540E2D0BA7A400E22BDB /* Airtable */,
 			);
@@ -396,6 +396,8 @@
 				E1D859C52D581FCB00458969 /* EXT_Resource.swift */,
 				E1FFEEB62D2366480042D7D1 /* MigrationView.swift */,
 				E1D859CA2D5A465300458969 /* ImageMigrationService.swift */,
+				E1FFEEB22D2334AB0042D7D1 /* Fields.swift */,
+				E1FFEEBA2D246E0A0042D7D1 /* MigrationLogEntry.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -840,6 +842,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E1BE8D422CA0F4C7002975C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		E1F1B14C2DAABDD90029F75B /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1BE8D422CA0F4C7002975C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		E1FFEEBE2D247E8B0042D7D1 /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;

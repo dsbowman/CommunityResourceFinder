@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DetailViewHeader: View {
     var resource: Resource
-//    var headerData: Fields
     @State private var headerHeight: CGFloat = 200
     
     var body: some View {
@@ -17,19 +16,18 @@ struct DetailViewHeader: View {
             if let id = resource.id, !id.isEmpty {
                 let imagePath = resource.imagePath
                 
-                VStack() {
+                VStack(spacing: 20) {
                     FirebaseImage(path: imagePath)
-                    .padding(20)
+                        .id(resource.id)
+                        .padding(.horizontal ,20)
                     .frame(width: 350, height: 150)
-                    HStack {
-                        Text(resource.label)
-                            .font(.title2)
-                            .foregroundStyle(.primary)
-                            .multilineTextAlignment(.leading)
-                            .fontWeight(.semibold)
-                    }
+                    Text(resource.label)
+                        .font(.title2)
+                        .foregroundStyle(.primary)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 5)
                 }
-//                .background(.white)
                 
             } else {
                 VStack(alignment: .center) {
@@ -40,9 +38,7 @@ struct DetailViewHeader: View {
                         .multilineTextAlignment(.center)
                         .padding(20)
                     
-                    
                 }
-//                .background(.white)
             }
             
             if let location = resource.primaryLocation {
@@ -65,7 +61,6 @@ struct DetailViewHeader: View {
             }
         }
         .containerRelativeFrame(.horizontal)
-//        .background(.white)
     }
 }
 

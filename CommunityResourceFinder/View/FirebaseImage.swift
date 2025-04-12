@@ -48,7 +48,6 @@ struct FirebaseImage: View {
     
     private func loadImage(from path: String) async {
         guard !isLoading, image == nil else { return }
-        
         isLoading = true
         defer { isLoading = false }
         

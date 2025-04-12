@@ -17,46 +17,46 @@ final class NetworkManager {
     
     private init() {}
     
-    func getData(offset: String? = nil) async throws -> (records: [Record], nextOffset: String?) {
-            // Construct the URL with offset if provided
-            var urlString = baseURL
-            if let offset = offset {
-                urlString += "?offset=\(offset)"
-            }
-        
-//            print("[DEBUG] Constructed URL: \(urlString)")
-
-            guard let url = URL(string: urlString) else {
-                print("Invalid URL: \(urlString)")
-                throw RFError.invalidURL
-            }
-
-            var request = URLRequest(url: url)
-            request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
-            request.httpMethod = "GET"
-//            print("[DEBUG] Request Headers: \(request.allHTTPHeaderFields ?? [:])")
-
-            let (data, response) = try await URLSession.shared.data(for: request)
-            print("Response Data: \(data)")
-    
-
-
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-//                print("[ERROR] Invalid HTTP Response Status Code")
-                throw RFError.invalidResponse
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                let communityResourceModel = try decoder.decode(CommunityResourceModel.self, from: data)
-                let nextOffset = communityResourceModel.offset // Airtable might provide the next offset
-//                print("Decoded Data: \(communityResourceModel)")
-                return (communityResourceModel.records, nextOffset)
-            } catch {
-//                print("[ERROR] Decoding error: \(error)")
-                throw RFError.invalidData // More specific error for decoding issues
-            }
-        }
+//    func getData(offset: String? = nil) async throws -> (records: [Record], nextOffset: String?) {
+//            // Construct the URL with offset if provided
+//            var urlString = baseURL
+//            if let offset = offset {
+//                urlString += "?offset=\(offset)"
+//            }
+//        
+////            print("[DEBUG] Constructed URL: \(urlString)")
+//
+//            guard let url = URL(string: urlString) else {
+//                print("Invalid URL: \(urlString)")
+//                throw RFError.invalidURL
+//            }
+//
+//            var request = URLRequest(url: url)
+//            request.setValue(authorizationToken, forHTTPHeaderField: "Authorization")
+//            request.httpMethod = "GET"
+////            print("[DEBUG] Request Headers: \(request.allHTTPHeaderFields ?? [:])")
+//
+//            let (data, response) = try await URLSession.shared.data(for: request)
+//            print("Response Data: \(data)")
+//    
+//
+//
+//            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+////                print("[ERROR] Invalid HTTP Response Status Code")
+//                throw RFError.invalidResponse
+//            }
+//
+//            do {
+//                let decoder = JSONDecoder()
+//                let communityResourceModel = try decoder.decode(CommunityResourceModel.self, from: data)
+//                let nextOffset = communityResourceModel.offset // Airtable might provide the next offset
+////                print("Decoded Data: \(communityResourceModel)")
+//                return (communityResourceModel.records, nextOffset)
+//            } catch {
+////                print("[ERROR] Decoding error: \(error)")
+//                throw RFError.invalidData // More specific error for decoding issues
+//            }
+//        }
 
     func downloadImage(fromURLString urlString: String, completed: @escaping (UIImage?) -> Void) {
         
