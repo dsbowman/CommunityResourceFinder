@@ -64,6 +64,9 @@ import FirebasePerformance
         listener?.remove()
     }
     
+
+
+    
     // MARK: - Public Methods
     func subscribeToResources() {
         print("subscribeToResources is being called")
@@ -93,8 +96,9 @@ import FirebasePerformance
         let initialQuery = db.collection("resources")
             .whereField("status", isEqualTo: "active")
             .order(by: "label")
-            .limit(to: initialBatchSize)
+            .limit(to: initialBatchSize) // Add getdocument() here at the top includes:
         
+    
         // Try to load from cache first
         initialQuery.getDocuments(source: .cache) { [weak self] snapshot, error in
             guard let self = self else {
@@ -230,7 +234,7 @@ import FirebasePerformance
                     if documents.count >= self.initialBatchSize {
                         try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
                         
-                        let loadMoreTrace = Performance.startTrace(name: "resources_load_more")
+                        _ = Performance.startTrace(name: "resources_load_more")
                         self.loadMoreResources()
                     }
                     
@@ -322,7 +326,7 @@ import FirebasePerformance
                 
                 // Load locations subcollection
                 let locationStartTime = Date()
-                let locationsSnapshot = try await document.reference.collection("locations").getDocuments()
+                let locationsSnapshot = try await document.reference.collection("locations").getDocuments(source: .cache)
                 let locationDocuments = locationsSnapshot.documents
                 locationLoadCount += locationDocuments.count
                 
@@ -335,7 +339,7 @@ import FirebasePerformance
                 
                 // Load contacts subcollection
                 let contactStartTime = Date()
-                let contactsSnapshot = try await document.reference.collection("contacts").getDocuments()
+                let contactsSnapshot = try await document.reference.collection("contacts").getDocuments(source: .cache)
                 let contactDocuments = contactsSnapshot.documents
                 contactLoadCount += contactDocuments.count
                 
@@ -437,6 +441,30 @@ import FirebasePerformance
         }
         
         isLoading = false
+    }
+    
+    
+    // MARK: - Update Location
+    
+    func updateLocation(resourceID: String, lat: Double, lon: Double) {
+        print("Updating \(resourceID) to lat: \(lat), lon: \(lon)")
+        let resourceRef = db.collection("resources").document(resourceID)
+        resourceRef.updateData([
+            "primaryLocationLat" : lat,
+            "primaryLocationLon" : lon
+        ])
+    }
+    
+    func updateAllLocations() {
+        for resource in resources {
+            if let location = resource.primaryLocation,
+                let coordinate = location.coordinate {
+                updateLocation(resourceID: resource.id!, lat: coordinate.latitude, lon: coordinate.longitude)
+
+                }
+
+        }
+        
     }
     
 }

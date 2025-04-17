@@ -109,7 +109,20 @@ struct DetailView: View {
                                     zip: location.zip
                                 )
                             }
+//                        if let location = resource.primaryLocation,
+//                            let coordinate = location.coordinate {
+//                            Button {
+//                                viewModel.upadateLocation(resourceID: resource.id!, lat: coordinate.latitude, lon: coordinate.longitude)
+//                            } label: {
+//                                Text("Update Location")
+//                            }
+//
+//                            }
                         }
+                    
+                    
+                    
+                    
                         
 
                     Button(action: {
@@ -129,6 +142,8 @@ struct DetailView: View {
         }
         .ignoresSafeArea(edges: .top) // Ignore safe area to allow the header to collapse smoothly
     }
+    
+    
 }
 
 //#Preview {

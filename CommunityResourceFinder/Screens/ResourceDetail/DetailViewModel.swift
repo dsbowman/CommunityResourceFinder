@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 import MapKit
 import CoreLocation
+import FirebaseFirestore
 
 class DetailViewModel: ObservableObject {
-    
+    private let db = Firestore.firestore()
     @Published var isShowingIssueForm = false
     @Published var position = MapCameraPosition.region(
             MKCoordinateRegion(
@@ -19,6 +20,15 @@ class DetailViewModel: ObservableObject {
                 span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
             )
         )
+    
+    func upadateLocation(resourceID: String, lat: Double, lon: Double) {
+        print("Updating \(resourceID) to lat: \(lat), lon: \(lon)")
+        let resourceRef = db.collection("resources").document(resourceID)
+        resourceRef.updateData([
+            "primaryLocationLat" : lat,
+            "primaryLocationLon" : lon
+        ])
+    }
     
 }
 

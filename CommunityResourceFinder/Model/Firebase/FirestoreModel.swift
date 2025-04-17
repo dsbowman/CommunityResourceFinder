@@ -17,19 +17,23 @@ struct Resource: Identifiable, Codable {
     var url: String?
     var logoUrl: String?
     var tags: [String]?
+    var status: Status
+    var airtableId: String?
     
     // Organization-level contact information
     var mainPhone: String?
     var emergencyPhone: String?
     var generalEmail: String?
+    var primaryLocationLat: Double?
+    var primaryLocationLong: Double?
    
     // Nested structures
     var locations: [Location]?
     var contacts: [Contact]?
-    var status: Status
-    var airtableId: String?
+    
+    
 }
-
+	
 // Nested Resource Types
 extension Resource {
     struct Location: Identifiable, Codable {
@@ -156,93 +160,5 @@ enum Status: String, Codable {
 enum ResourceType: String, Codable {
     case organization = "Organization"
     case program = "Program"
-    case event = "Event"
+    case service = "Service"
 }
-
-
-
-//struct Resource: Identifiable, Codable {
-//    @DocumentID var id: String?
-//    var label: String
-//    var description: String?
-//    var type: ResourceType
-//    var url: String?
-//    var logoUrl: String?
-//    var tags: [String]?
-//    var mainPhone: String?
-//    var emergencyPhone: String?
-//    var generalEmail: String?
-//    var locations: [Location]?
-//    var contacts: [Contact]?
-//    var status: ResourceStatus
-//
-//    enum ResourceType: String, Codable {
-//        case organization = "Organization"
-//        case program = "Program"
-//        case event = "Event"
-//    }
-//
-//    enum ResourceStatus: String, Codable {
-//        case active
-//        case inactive
-//        case pending
-//    }
-//
-//    // Location embedded type
-//    struct Location: Identifiable, Codable {
-//        @DocumentID var id: String?
-//        var label: String
-//        var street1: String?
-//        var street2: String?
-//        var city: String?
-//        var state: String?
-//        var zip: String?
-//        var hoursOfOperation: [HoursOfOperation]?
-//        var latitude: Double?
-//        var longitude: Double?
-//        var locationPhone: String?
-//        var locationEmail: String?
-//
-//        var coordinate: CLLocationCoordinate2D? {
-//            if let lat = latitude, let long = longitude {
-//                return CLLocationCoordinate2D(latitude: lat, longitude: long)
-//            }
-//            return nil
-//        }
-//    }
-//
-//    // Contact embedded type
-//    struct Contact: Identifiable, Codable {
-//        @DocumentID var id: String?
-//        var label: String
-//        var phone: String?
-//        var email: String?
-//        var role: String?
-//        var locationId: String?
-//    }
-//
-//    // Hours of operation structure
-//    struct HoursOfOperation: Codable {
-//        var days: [DayHours]
-//
-//        struct DayHours: Identifiable, Codable {
-//            var id: String { day.rawValue }
-//            var day: Weekday
-//            var open: String?
-//            var close: String?
-//        }
-//
-//        enum Weekday: String, Codable, CaseIterable {
-//            case monday, tuesday, wednesday, thursday, friday, saturday, sunday
-//        }
-//    }
-//
-//    // Helper computed properties
-//    var primaryLocation: Location? {
-//        locations?.first
-//    }
-//
-//    var imagePath: String {
-//        "resource_images/\(id ?? "")/logo.jpg"
-//    }
-//}
