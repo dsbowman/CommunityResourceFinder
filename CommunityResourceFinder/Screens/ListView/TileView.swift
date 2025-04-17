@@ -42,10 +42,10 @@ struct TileView: View {
 //                        }
 //                        ToolbarItem {
 //                            Button {
-//                                
+//                                viewModel.updateAllLocations()
 //                                
 //                            } label: {
-//                                Text("Update Location")
+//                                Text("Update Locations")
 //                            }
 //                        }
                         
