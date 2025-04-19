@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		E10E6B2B2C66FC4A004D2A35 /* NewResourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2A2C66FC4A004D2A35 /* NewResourceView.swift */; };
 		E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2C2C66FC74004D2A35 /* FeedbackViewModel.swift */; };
 		E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */; };
+		E14954052D0BA72700E22BDB /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14954042D0BA72700E22BDB /* FirestoreModel.swift */; };
 		E14954132D0BAAD300E22BDB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E14954122D0BAAD300E22BDB /* FirebaseAnalytics */; };
 		E14954152D0BAAD300E22BDB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E14954142D0BAAD300E22BDB /* FirebaseAuth */; };
 		E14954172D0BAAD300E22BDB /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E14954162D0BAAD300E22BDB /* FirebaseCrashlytics */; };
@@ -61,13 +62,23 @@
 		E1BE8D442CA0F4C7002975C8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E1BE8D432CA0F4C7002975C8 /* FirebaseAnalytics */; };
 		E1BE8D462CA0F4C7002975C8 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = E1BE8D452CA0F4C7002975C8 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		E1C0471F2C8746FF00540B89 /* RoundContactControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */; };
+		E1D859C62D581FCB00458969 /* EXT_Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D859C52D581FCB00458969 /* EXT_Resource.swift */; };
 		E1D859C82D58270200458969 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D859C72D58270200458969 /* GeocodingService.swift */; };
+		E1D859CB2D5A465300458969 /* ImageMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D859CA2D5A465300458969 /* ImageMigrationService.swift */; };
 		E1E424D92C8B340F000DD48D /* TabViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E424D82C8B340F000DD48D /* TabViewControl.swift */; };
 		E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7216C2C887F8700BC0DEA /* WebView.swift */; };
 		E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */; };
 		E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3042C9C749A00373567 /* MapDetailControl.swift */; };
 		E1F1B14D2DAABDD90029F75B /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = E1F1B14C2DAABDD90029F75B /* FirebasePerformance */; };
+		E1F1B1502DAB0BA60029F75B /* LocalResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */; };
+		E1FFEEAE2D2333D00042D7D1 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */; };
 		E1FFEEB12D2334210042D7D1 /* FieldsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB02D2334210042D7D1 /* FieldsValidation.swift */; };
+		E1FFEEB32D2334AB0042D7D1 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB22D2334AB0042D7D1 /* Fields.swift */; };
+		E1FFEEB52D2363B30042D7D1 /* FirestoreMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB42D2363B30042D7D1 /* FirestoreMigrationService.swift */; };
+		E1FFEEB72D2366480042D7D1 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB62D2366480042D7D1 /* MigrationView.swift */; };
+		E1FFEEB92D244EB60042D7D1 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB82D244EB60042D7D1 /* MigrationManager.swift */; };
+		E1FFEEBB2D246E100042D7D1 /* MigrationLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEBA2D246E0A0042D7D1 /* MigrationLogEntry.swift */; };
+		E1FFEEBD2D246EA60042D7D1 /* MigrationLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEBC2D246EA60042D7D1 /* MigrationLogView.swift */; };
 		E1FFEEBF2D247E8B0042D7D1 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = E1FFEEBE2D247E8B0042D7D1 /* FirebaseAppCheck */; };
 		E1FFEEC12D247E8B0042D7D1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E1FFEEC02D247E8B0042D7D1 /* FirebaseCrashlytics */; };
 		E1FFEEC52D248A670042D7D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */; };
@@ -108,20 +119,35 @@
 		E10E6B2C2C66FC74004D2A35 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
 		E10E6B2E2C66FC89004D2A35 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E14954042D0BA72700E22BDB /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		E149543F2D0DDCFC00E22BDB /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageService.swift; sourceTree = "<group>"; };
 		E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
 		E1B7F1B72D9A028300C17337 /* ResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepository.swift; sourceTree = "<group>"; };
 		E1C0471E2C8746FF00540B89 /* RoundContactControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundContactControl.swift; sourceTree = "<group>"; };
+		E1D859C52D581FCB00458969 /* EXT_Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_Resource.swift; sourceTree = "<group>"; };
 		E1D859C72D58270200458969 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
+		E1D859CA2D5A465300458969 /* ImageMigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMigrationService.swift; sourceTree = "<group>"; };
 		E1E424D82C8B340F000DD48D /* TabViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewControl.swift; sourceTree = "<group>"; };
 		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewHeader.swift; sourceTree = "<group>"; };
 		E1EAF3042C9C749A00373567 /* MapDetailControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailControl.swift; sourceTree = "<group>"; };
+		E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalResourceModel.swift; sourceTree = "<group>"; };
+		E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		E1FFEEB02D2334210042D7D1 /* FieldsValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsValidation.swift; sourceTree = "<group>"; };
+		E1FFEEB22D2334AB0042D7D1 /* Fields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fields.swift; sourceTree = "<group>"; };
+		E1FFEEB42D2363B30042D7D1 /* FirestoreMigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMigrationService.swift; sourceTree = "<group>"; };
+		E1FFEEB62D2366480042D7D1 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
+		E1FFEEB82D244EB60042D7D1 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
+		E1FFEEBA2D246E0A0042D7D1 /* MigrationLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationLogEntry.swift; sourceTree = "<group>"; };
+		E1FFEEBC2D246EA60042D7D1 /* MigrationLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationLogView.swift; sourceTree = "<group>"; };
 		E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E14954412D0DDD4800E22BDB /* SearchView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SearchView; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E10E6AE22C66CCD1004D2A35 /* Frameworks */ = {
@@ -174,6 +200,7 @@
 		E10E6AE72C66CCD1004D2A35 /* CommunityResourceFinder */ = {
 			isa = PBXGroup;
 			children = (
+				E1D859C92D5A461C00458969 /* Migration */,
 				E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */,
 				E123AA442C7E437C0070D9FB /* Info.plist */,
 				E10E6AF62C66CD06004D2A35 /* Model */,
@@ -201,6 +228,9 @@
 		E10E6AF62C66CD06004D2A35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E1F1B14E2DAB0B720029F75B /* SwiftData */,
+				E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */,
+				E14954112D0BA7EA00E22BDB /* Firebase */,
 				E149540E2D0BA7A400E22BDB /* Airtable */,
 			);
 			path = Model;
@@ -241,6 +271,7 @@
 		E10E6AFA2C66CD23004D2A35 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				E14954412D0DDD4800E22BDB /* SearchView */,
 				E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */,
 				E10E6B302C66FCAE004D2A35 /* ListView */,
 				E10E6B312C66FCCF004D2A35 /* MapView */,
@@ -331,6 +362,14 @@
 			path = Airtable;
 			sourceTree = "<group>";
 		};
+		E14954112D0BA7EA00E22BDB /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				E14954042D0BA72700E22BDB /* FirestoreModel.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		E1A647232C8278940068109E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +390,29 @@
 			path = "Contact Buttons";
 			sourceTree = "<group>";
 		};
+		E1D859C92D5A461C00458969 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				E1FFEEB42D2363B30042D7D1 /* FirestoreMigrationService.swift */,
+				E1FFEEB82D244EB60042D7D1 /* MigrationManager.swift */,
+				E1FFEEBC2D246EA60042D7D1 /* MigrationLogView.swift */,
+				E1D859C52D581FCB00458969 /* EXT_Resource.swift */,
+				E1FFEEB62D2366480042D7D1 /* MigrationView.swift */,
+				E1D859CA2D5A465300458969 /* ImageMigrationService.swift */,
+				E1FFEEB22D2334AB0042D7D1 /* Fields.swift */,
+				E1FFEEBA2D246E0A0042D7D1 /* MigrationLogEntry.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
+		E1F1B14E2DAB0B720029F75B /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,6 +427,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E14954412D0DDD4800E22BDB /* SearchView */,
 			);
 			name = CommunityResourceFinder;
 			productName = CommunityResourceFinder;
@@ -427,28 +492,37 @@
 			files = (
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
 				E14954402D0DDD0D00E22BDB /* FirestoreManager.swift in Sources */,
+				E1F1B1502DAB0BA60029F75B /* LocalResourceModel.swift in Sources */,
+				E1FFEEB92D244EB60042D7D1 /* MigrationManager.swift in Sources */,
 				E1B7F1B82D9A028300C17337 /* ResourceRepository.swift in Sources */,
 				E1B7F1B62D99CB7800C17337 /* FirebaseImage.swift in Sources */,
 				E1E7216D2C887F8700BC0DEA /* WebView.swift in Sources */,
 				E10E6B032C66CDF0004D2A35 /* Alert.swift in Sources */,
+				E1FFEEBB2D246E100042D7D1 /* MigrationLogEntry.swift in Sources */,
 				E10E6B0D2C66D091004D2A35 /* LargeTile.swift in Sources */,
+				E1D859CB2D5A465300458969 /* ImageMigrationService.swift in Sources */,
+				E1FFEEB72D2366480042D7D1 /* MigrationView.swift in Sources */,
 				E10E6B232C66FBB9004D2A35 /* MapView.swift in Sources */,
 				E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */,
 				E1FFEEB12D2334210042D7D1 /* FieldsValidation.swift in Sources */,
 				E10E6B012C66CDE1004D2A35 /* RFError.swift in Sources */,
 				E10E6B292C66FC30004D2A35 /* NewResourceViewModel.swift in Sources */,
 				E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */,
+				E14954052D0BA72700E22BDB /* FirestoreModel.swift in Sources */,
 				E1B7F1B42D99C8FB00C17337 /* FirebaseImageService.swift in Sources */,
 				E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */,
 				E10E6B2B2C66FC4A004D2A35 /* NewResourceView.swift in Sources */,
 				E1D859C82D58270200458969 /* GeocodingService.swift in Sources */,
+				E1FFEEBD2D246EA60042D7D1 /* MigrationLogView.swift in Sources */,
 				E10E6AFF2C66CD92004D2A35 /* NewResourceModel.swift in Sources */,
 				E10E6B172C66FAB3004D2A35 /* ContactButton.swift in Sources */,
 				E10E6B1D2C66FB60004D2A35 /* DetailViewModel.swift in Sources */,
 				E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */,
 				E10E6B112C66D0D1004D2A35 /* CategoryListTile.swift in Sources */,
+				E1FFEEB32D2334AB0042D7D1 /* Fields.swift in Sources */,
 				E10E6B1B2C66FB41004D2A35 /* ListView.swift in Sources */,
 				E10E6B052C66CFF1004D2A35 /* NetworkManager.swift in Sources */,
+				E1FFEEAE2D2333D00042D7D1 /* ValidationError.swift in Sources */,
 				E10E6B212C66FB9E004D2A35 /* MapViewModel.swift in Sources */,
 				E10E6AEB2C66CCD1004D2A35 /* ContentView.swift in Sources */,
 				E10E6AE92C66CCD1004D2A35 /* CommunityResourceFinderApp.swift in Sources */,
@@ -459,6 +533,8 @@
 				E10E6B2F2C66FC89004D2A35 /* FeedbackView.swift in Sources */,
 				E1A647252C8278B50068109E /* TabbedItems.swift in Sources */,
 				E10E6B0B2C66D065004D2A35 /* RemoteImageView.swift in Sources */,
+				E1FFEEB52D2363B30042D7D1 /* FirestoreMigrationService.swift in Sources */,
+				E1D859C62D581FCB00458969 /* EXT_Resource.swift in Sources */,
 				E10E6B092C66D04C004D2A35 /* LoadingView.swift in Sources */,
 				E107F0962C69097B00B0B817 /* ContactMenu.swift in Sources */,
 				E10E6B152C66FA6A004D2A35 /* ContactControl.swift in Sources */,
