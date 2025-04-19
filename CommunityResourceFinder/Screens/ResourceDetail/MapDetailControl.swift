@@ -10,38 +10,41 @@ import MapKit
 
 struct MapDetailControl: View {
     
-    var resourceData: Fields
+    var latitude: Double
+    var longitude: Double
+    var label: String
+    var street1: String?
+    var street2: String?
+    var city: String?
+    var state: String?
+    var zip: String?
     
     @State private var position = MapCameraPosition.region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 39.9526, longitude: -75.1652),
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            )
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 39.9526, longitude: -75.1652),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         )
+    )
     
     var body: some View {
-        if let street1 = resourceData.street1, let city = resourceData.city, let state = resourceData.state {
+        if let street1 = street1, let city = city, let state = state {
             Section {
                 HStack(alignment: .top) {
                     ZStack {
                         VStack(alignment: .leading, spacing: 0) {
                             Map(position: $position) {
-                                if let coordinate = resourceData.locationCoordinate {
-                                    Annotation(resourceData.label, coordinate: coordinate) {
-                                        Circle()
-                                            .fill(.blue)
-                                            .frame(width: 10, height: 10)
-                                    }
+                                Annotation(label, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
+                                    Circle()
+                                        .fill(.blue)
+                                        .frame(width: 10, height: 10)
                                 }
                             }
                             .frame(height: 175)
                             .onAppear {
-                                if let coordinate = resourceData.locationCoordinate {
-                                    position = MapCameraPosition.region(MKCoordinateRegion(
-                                        center: coordinate,
-                                        span: MKCoordinateSpan(latitudeDelta: 0.003125, longitudeDelta: 0.003125)
-                                    ))
-                                }
+                                position = MapCameraPosition.region(MKCoordinateRegion(
+                                    center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                                    span: MKCoordinateSpan(latitudeDelta: 0.003125, longitudeDelta: 0.003125)
+                                ))
                             }
                             
                             VStack(alignment: .leading) {
@@ -50,14 +53,15 @@ struct MapDetailControl: View {
                                 Link(destination: URL(string: "http://maps.apple.com/?address=\(street1),\(city),\(state)")!, label: {
                                     HStack() {
                                         Text(street1)
-                                        if let street2 = resourceData.street2 {
+                                        if let street2 = street2 {
                                             Text(street2)}
-                                        Text("\(city), \(state) \(resourceData.zip ?? "")")
+                                        Text("\(city), \(state) \(zip ?? "")")
                                         Spacer()
                                     }
                                     .font(.subheadline)
                                     
                                 })
+                                
                             }
                             .fontWeight(.semibold)
                             .foregroundStyle(.white)
@@ -74,13 +78,13 @@ struct MapDetailControl: View {
                     }
                     
                 }
-
+                
             }
-
+            
         }
     }
 }
 
-#Preview {
-    MapDetailControl(resourceData: MockData.sampleResource)
-}
+//#Preview {
+//    MapDetailControl(resourceData: MockData.sampleResource)
+//}

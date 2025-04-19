@@ -94,5 +94,5 @@ enum FieldsType: String, Decodable {
 }
 
 struct MockData {
-    static let sampleResource = Fields(descriptionNotes: "Mock Data for a mock detail", url: "https://dekebowman.smugmug.com", label: "Demo Mock Detail", hoursOfOperation: "Mon-Fri 9 - 5", phoneContact: "812-555-5555", emergencyAssistanceNumber: "756-555-5555", phoneContact2: "215-121-5555", street1: "1826 Moore Street", email: "demo@testemail.com", state: "PA", zip: "19145", city: "Philadelphia")
+    static let sampleResource = Fields(descriptionNotes: "Mock Data for a mock detail. We need this to be much longer so we can test out what the hell happens when we have a crazy long string of text r/n/Then people throw in paragraphs and keep writing all kinds of stuff assuming people might read it and then they don't.", url: "https://dekebowman.smugmug.com", label: "Demo Mock Detail", hoursOfOperation: "Mon-Fri 9 - 5", phoneContact: "812-555-5555", emergencyAssistanceNumber: "756-555-5555", phoneContact2: "215-121-5555", street1: "1826 Moore Street", email: "demo@testemail.com", state: "PA", zip: "19145", city: "Philadelphia")
 }

@@ -54,3 +54,7 @@ class RoundContactControl {
         }
     }
 }
+
+#Preview {
+    RoundContactControl.ActionButton(icon: "person.crop.circle.fill", activeColor: .init(red: 0.1, green: 0.2, blue: 0.3), url: "https://www.apple.com")
+}

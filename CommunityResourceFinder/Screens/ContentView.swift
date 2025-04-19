@@ -12,18 +12,23 @@ import SwiftUI
 struct ContentView: View {
     
     @State var selectedTab = 0
-    
+    @StateObject private var sharedViewModel = ListViewModel()
+        
     var body: some View {
         
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
-                TileView()
+                TileView(viewModel: sharedViewModel)
                     .tag(0)
                     .toolbar(.hidden, for: .tabBar)
                     
-                MapView()
+                MapView(viewModel: sharedViewModel)
                     .tag(1)
                     .toolbar(.hidden, for: .tabBar)
+                
+//                MigrationView()
+//                    .tag(2)
+//                    .toolbar(.hidden, for: .tabBar)
             }
 //            .safeAreaInset(edge: .bottom) {
 //                TabViewControl()
@@ -47,6 +52,18 @@ struct ContentView: View {
 
         }
         .accentColor(.teal)
+        .task {
+            sharedViewModel.subscribeToResources()
+        }
+        .overlay {
+            if sharedViewModel.isLoading {
+                LoadingView()
+            } else if sharedViewModel.filteredResources.isEmpty {
+                ContentUnavailableView.search(text: sharedViewModel.searchText)
+            }
+        }
+        
+        
     }
 }
 

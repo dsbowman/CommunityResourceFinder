@@ -8,7 +8,8 @@
 import SwiftUI
 import MapKit
 
- class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
+ 
+class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager?
      @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.952583, longitude: -75.165222), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
@@ -47,10 +48,5 @@ import MapKit
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
-     
-     
-     
-
-
     
 }

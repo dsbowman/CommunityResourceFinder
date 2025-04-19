@@ -10,6 +10,7 @@ import Foundation
 enum TabbedItems: Int, CaseIterable {
     case list = 0
     case map
+//    case migration
 //    case profile
     
     
@@ -22,6 +23,8 @@ enum TabbedItems: Int, CaseIterable {
             return "Map"
 //        case .profile :
 //            return "Profile"
+//        case .migration :
+//            return "Migration"
         }
     }
     
@@ -33,6 +36,8 @@ enum TabbedItems: Int, CaseIterable {
             return "globe"
 //        case .profile:
 //            return "person.fill"
+//        case .migration:
+//            return "square.and.arrow.down"
         }
     }
     

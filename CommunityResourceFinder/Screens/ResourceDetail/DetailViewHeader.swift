@@ -8,54 +8,63 @@
 import SwiftUI
 
 struct DetailViewHeader: View {
-    
-    var headerData: Fields
+    var resource: Resource
+    @State private var headerHeight: CGFloat = 200
     
     var body: some View {
         VStack(alignment: .center) {
-            if let imageUrl = headerData.logo?.first?.url, let _ = URL(string: imageUrl) {
-                VStack() {
-                    AsyncImage(url: URL(string: imageUrl)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                            .controlSize(.large)
-                    }
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
+            if let id = resource.id, !id.isEmpty {
+                let imagePath = resource.imagePath
+                
+                VStack(spacing: 20) {
+                    FirebaseImage(path: imagePath)
+                        .id(resource.id)
+                        .padding(.horizontal ,20)
                     .frame(width: 350, height: 150)
-                    .background(.white)
-                    .cornerRadius(20)
-                    
-                    HStack {
-                        Text(headerData.label)
-                            .foregroundStyle(.primary)
-                            .multilineTextAlignment(.leading)
-                            .fontWeight(.semibold)
-                        //                            Spacer()
-                        //                        Image(systemName: "heart")
-                    }
-                    .padding(5)
-                    
+                    Text(resource.label)
+                        .font(.title2)
+                        .foregroundStyle(.primary)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 5)
                 }
-                .frame(width: 350)
+                
             } else {
                 VStack(alignment: .center) {
-                    Text(headerData.label)
+                    Text(resource.label)
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.primary)
                         .multilineTextAlignment(.center)
                         .padding(20)
                     
-                    
                 }
             }
+            
+            if let location = resource.primaryLocation {
+                ContactMenu(
+                    phone: resource.mainPhone,
+                    emergency: resource.emergencyPhone,
+                    email: resource.generalEmail,
+                    street1: location.street1,
+                    street2: location.street2,
+                    city: location.city,
+                    state: location.state,
+                    url: resource.url)
+            } else {
+                ContactMenu(
+                    phone: resource.mainPhone,
+                    emergency: resource.emergencyPhone,
+                    email: resource.generalEmail,
+                    url: resource.url)
+                
+            }
         }
+        .containerRelativeFrame(.horizontal)
     }
 }
 
 
-#Preview {
-    DetailViewHeader(headerData: MockData.sampleResource)
-}
+//#Preview {
+//    DetailViewHeader(headerData: MockData.sampleResource)
+//}

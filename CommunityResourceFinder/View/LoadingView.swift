@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ActivityIndicator: UIViewRepresentable {
-    
     func makeUIView(context: Context) -> UIActivityIndicatorView {
         let activityIndicatorView = UIActivityIndicatorView(style: .large)
         activityIndicatorView.color = UIColor.lightGray
@@ -23,17 +22,29 @@ struct ActivityIndicator: UIViewRepresentable {
 }
 
 struct LoadingView: View {
+    
+    var loadingMessage = "Downloading and updating resources..."
+    var loadingViewIcon = "Logo"
+    
     var body: some View {
         ZStack {
             Color(.systemBackground)
                 .ignoresSafeArea()
             
             VStack {
-                ProgressView("Loading")
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(1.25)
-                    .font(.caption)
+                Image(loadingViewIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 150, height: 150)
+                
+                Text(loadingMessage)
+                    .font(.title3)
                     .foregroundStyle(.secondary)
+                    .padding(.bottom)
+                
+                ProgressView()
+                    .scaleEffect(1.25)
+
             }
         }
     }
@@ -52,3 +63,7 @@ struct LoadingView: View {
 //        }
 //    }
 //}
+
+#Preview {
+    LoadingView()
+}
