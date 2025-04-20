@@ -70,7 +70,6 @@
 		E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */; };
 		E1EAF3052C9C749A00373567 /* MapDetailControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1EAF3042C9C749A00373567 /* MapDetailControl.swift */; };
 		E1F1B14D2DAABDD90029F75B /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = E1F1B14C2DAABDD90029F75B /* FirebasePerformance */; };
-		E1F1B1502DAB0BA60029F75B /* LocalResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */; };
 		E1FFEEAE2D2333D00042D7D1 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */; };
 		E1FFEEB12D2334210042D7D1 /* FieldsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB02D2334210042D7D1 /* FieldsValidation.swift */; };
 		E1FFEEB32D2334AB0042D7D1 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FFEEB22D2334AB0042D7D1 /* Fields.swift */; };
@@ -133,7 +132,6 @@
 		E1E7216C2C887F8700BC0DEA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E1EAF3022C9C73B800373567 /* DetailViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewHeader.swift; sourceTree = "<group>"; };
 		E1EAF3042C9C749A00373567 /* MapDetailControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailControl.swift; sourceTree = "<group>"; };
-		E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalResourceModel.swift; sourceTree = "<group>"; };
 		E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		E1FFEEB02D2334210042D7D1 /* FieldsValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsValidation.swift; sourceTree = "<group>"; };
 		E1FFEEB22D2334AB0042D7D1 /* Fields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fields.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 		E10E6AF62C66CD06004D2A35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E1F1B14E2DAB0B720029F75B /* SwiftData */,
 				E1FFEEAD2D2333CE0042D7D1 /* ValidationError.swift */,
 				E14954112D0BA7EA00E22BDB /* Firebase */,
 				E149540E2D0BA7A400E22BDB /* Airtable */,
@@ -405,14 +402,6 @@
 			path = Migration;
 			sourceTree = "<group>";
 		};
-		E1F1B14E2DAB0B720029F75B /* SwiftData */ = {
-			isa = PBXGroup;
-			children = (
-				E1F1B14F2DAB0BA60029F75B /* LocalResourceModel.swift */,
-			);
-			path = SwiftData;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -492,7 +481,6 @@
 			files = (
 				E10E6B0F2C66D0AF004D2A35 /* ListItem.swift in Sources */,
 				E14954402D0DDD0D00E22BDB /* FirestoreManager.swift in Sources */,
-				E1F1B1502DAB0BA60029F75B /* LocalResourceModel.swift in Sources */,
 				E1FFEEB92D244EB60042D7D1 /* MigrationManager.swift in Sources */,
 				E1B7F1B82D9A028300C17337 /* ResourceRepository.swift in Sources */,
 				E1B7F1B62D99CB7800C17337 /* FirebaseImage.swift in Sources */,
@@ -693,7 +681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.0;
+				MARKETING_VERSION = 2025.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dekebowman.ResourceFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -726,7 +714,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.0;
+				MARKETING_VERSION = 2025.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dekebowman.ResourceFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
