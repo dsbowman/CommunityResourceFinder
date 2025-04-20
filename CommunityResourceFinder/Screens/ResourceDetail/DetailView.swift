@@ -147,5 +147,5 @@ struct DetailView: View {
 }
 
 //#Preview {
-//    DetailView(apiData: MockData.sampleResource)
+//    DetailView(resource: <#Resource#>)
 //}
