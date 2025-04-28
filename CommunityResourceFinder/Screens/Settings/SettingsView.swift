@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @State private var showWebView = false
+    var url = "https://resourcefinder.help"
+    var label: String?
+    var fontColor: Color?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack() {
+            List{
+                Button( action: {
+                    showWebView.toggle()
+                }, label: {
+                    Text("Resource Finder Privacy Policy")
+                })
+//                Button( action: {
+//                    print("List Settings")
+//                }, label: {
+//                    Text("List Settings")
+//                })
+//                Button( action: {
+//                    print("Login")
+//                }, label: {
+//                    Text("Login")
+//                })
+                
+            }
+            .navigationTitle(Text("Settings"))
+        }
+        .sheet(isPresented: $showWebView, content: {
+                    WebView(url: URL(string: url)!)                
+        })
     }
 }
 

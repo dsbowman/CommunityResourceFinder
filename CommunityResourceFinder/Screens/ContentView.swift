@@ -26,6 +26,10 @@ struct ContentView: View {
                     .tag(1)
                     .toolbar(.hidden, for: .tabBar)
                 
+                SettingsView()
+                    .tag(2)
+                    .toolbar(.hidden, for: .tabBar)
+                
 //                MigrationView()
 //                    .tag(2)
 //                    .toolbar(.hidden, for: .tabBar)
@@ -89,7 +93,7 @@ extension ContentView {
             }
             Spacer()
         }
-        .frame(width: isActive ? 100 : 60, height: 50)
+        .frame(width: isActive ? 125 : 60, height: 50)
         //change the first value to .infinity when adding additional menu choices or expand appropriate to the number of choices
         
         .background(isActive ? .darkBlue.opacity(0.5) : .clear)

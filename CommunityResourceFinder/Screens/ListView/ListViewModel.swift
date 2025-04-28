@@ -13,27 +13,26 @@ import FirebaseFirestore
 import FirebasePerformance
 
 @MainActor class ListViewModel: ObservableObject {
+    
     // MARK: - Published Properties
     @Published var resources: [Resource] = []
     @Published var alertItem: AlertItem?
     @Published var isLoading = true
     @Published var searchText: String = ""
     @Published var activeSheet: SheetType?
-//    @Published var isShowingList = true
     @Published var selectedResource: Resource?
     @Published var mapRegion: MKCoordinateRegion? = nil
-//    @Published var showMapView: Bool = false
     @Published var isLoadingMore = false
-//    @Published var hasAttemptedInitialLoad = false
     @Published var isInitialLoadComplete = false
     private var lastDocumentSnapshot: DocumentSnapshot?
     private let initialBatchSize = 80
     private let additionalBatchSize = 100
     private var hasLoadedFromCache = false
+//     @Published var hasAttemptedInitialLoad = false
+//    @Published var showMapView: Bool = false
+//    @Published var isShowingList = true
 //    private var shouldShowLoading: Bool = false
 
-    
- 
     // MARK: - Private Properties
     private var listener: ListenerRegistration?
     private let db = Firestore.firestore()
@@ -326,7 +325,7 @@ import FirebasePerformance
                 
                 // Load locations subcollection
                 let locationStartTime = Date()
-                let locationsSnapshot = try await document.reference.collection("locations").getDocuments(source: .cache)
+                let locationsSnapshot = try await document.reference.collection("locations").getDocuments(source: .server)
                 let locationDocuments = locationsSnapshot.documents
                 locationLoadCount += locationDocuments.count
                 
@@ -339,7 +338,7 @@ import FirebasePerformance
                 
                 // Load contacts subcollection
                 let contactStartTime = Date()
-                let contactsSnapshot = try await document.reference.collection("contacts").getDocuments(source: .cache)
+                let contactsSnapshot = try await document.reference.collection("contacts").getDocuments(source: .server)
                 let contactDocuments = contactsSnapshot.documents
                 contactLoadCount += contactDocuments.count
                 
@@ -465,6 +464,35 @@ import FirebasePerformance
 
         }
         
+    }
+    
+    
+    func createVCard(resource: Resource) -> String {
+        
+        let address: String
+        
+        if let street1 = resource.primaryLocation?.street1,
+           let city = resource.primaryLocation?.city,
+           let state = resource.primaryLocation?.state,
+           let zip = resource.primaryLocation?.zip
+        {
+            address = "\(street1), \(city), \(state) \(zip)"
+        } else {
+            address = ""
+        }
+      
+        return """
+             BEGIN:VCARD
+             VERSION:3.0
+             ORG:\(resource.label)
+             TEL;TYPE=WORK,VOICE:\(resource.mainPhone ?? "")
+             TEL;TYPE=EMERGENCY,VOICE:\(resource.emergencyPhone ?? "")
+             EMAIL;TYPE=WORK:\(resource.generalEmail ?? "")
+             URL:\(resource.url ?? "")
+             ADR;TYPE=WORK:;;\(address)
+             NOTE:\(resource.description ?? "")
+             END:VCARD
+             """
     }
     
 }

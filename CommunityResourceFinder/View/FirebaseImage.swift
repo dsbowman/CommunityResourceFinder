@@ -7,8 +7,9 @@
 
 import SwiftUI
 import FirebaseStorage
+import UniformTypeIdentifiers
 
-struct FirebaseImage: View {
+struct FirebaseImage: View, Transferable {
     let path: String?
     var width: CGFloat? = nil
     var height: CGFloat? = nil
@@ -18,6 +19,19 @@ struct FirebaseImage: View {
     @State private var image: UIImage?
     @State private var isLoading = false
     @State private var error: Error?
+    
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(exportedContentType: .png) { firebaseImage in
+            guard let image = await firebaseImage.image, let pngData = image.pngData() else {
+                throw TransferError.imageNotAvailable
+            }
+            return pngData
+        }
+    }
+    
+    enum TransferError: Error {
+        case imageNotAvailable
+    }
     
     var body: some View {
         ZStack {

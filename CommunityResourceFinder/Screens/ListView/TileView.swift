@@ -23,10 +23,12 @@ struct TileView: View {
                             .accentColor(.primary)
                             .onTapGesture {
                                 viewModel.activeSheet = .resourceDetail(resource)
+                                viewModel.selectedResource = resource
+                                
                             }
                     }
                     }
-                    .listStyle(.plain)
+//                    .listStyle(.plain)
                     .navigationTitle("Resources Finder")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
@@ -48,7 +50,7 @@ struct TileView: View {
 //                                Text("Update Locations")
 //                            }
 //                        }
-                        
+                                                
                     }
                     
                     .background(.ultraThinMaterial)
@@ -91,14 +93,10 @@ struct TileView: View {
                 case .webView(_):
                     WebView(url: URL(string: "https://www.resourcefinder.app/") ?? URL(string: "https://www.google.com")!)
                 }
-                
-                
+ 
             }
             .presentationDragIndicator(.visible)
-//            .onAppear {
-//                viewModel.testFirestoreConnection()
-//            }
-            
+
         }
     }
 }
