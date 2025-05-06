@@ -71,7 +71,7 @@ struct MapView: View {
                     MapScaleView()
                     MapCompass()
                     MapPitchToggle()
-                    //MapUserLocationButton()
+                    MapUserLocationButton()
                 }
                 
                 .sheet(item: $viewModel.activeSheet) { sheetType in
