@@ -66,7 +66,7 @@ struct TileView: View {
                     .background(Color("DarkNavy"))
                 }
                 .refreshable {
-                    viewModel.subscribeToResources()
+                    viewModel.downloadResources()
                 }
                 
                 
@@ -78,9 +78,9 @@ struct TileView: View {
                 
             }
             .sheet(item: $viewModel.activeSheet) { sheetType in
+                Spacer().frame(height: 20)
                 switch sheetType {
                 case .resourceDetail(let resource):
-                    Spacer().frame(height: 20)
                     DetailView(resource: resource)
                     
                 case .issueForm:

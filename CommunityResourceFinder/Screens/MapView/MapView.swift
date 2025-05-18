@@ -13,7 +13,7 @@ import MapKit
 struct MapView: View {
     
     @ObservedObject var viewModel = ListViewModel()
-    @State private var settingsDetent = PresentationDetent.height(300)
+    @State private var settingsDetent = PresentationDetent.medium
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var automaticPosition = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -78,7 +78,7 @@ struct MapView: View {
                     switch sheetType {
                     case .resourceDetail(let resource):
                         DetailView(resource: resource)
-                            .presentationDetents([.height(270), .medium, .large], selection: $settingsDetent)
+                            .presentationDetents([.medium, .large], selection: $settingsDetent)
                             .presentationDragIndicator(.visible)
                             .presentationBackgroundInteraction(.enabled(upThrough: .medium))
                     

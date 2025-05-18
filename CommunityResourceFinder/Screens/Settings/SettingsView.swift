@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @ObservedObject var viewModel = ListViewModel()
+    
     @State private var showWebView = false
     var url = "https://resourcefinder.help"
     var label: String?
@@ -32,7 +34,6 @@ struct SettingsView: View {
 //                }, label: {
 //                    Text("Login")
 //                })
-                
             }
             .navigationTitle(Text("Settings"))
         }
