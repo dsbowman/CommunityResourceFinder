@@ -13,7 +13,7 @@ import MapKit
 struct MapView: View {
     
     @ObservedObject var viewModel = ListViewModel()
-    @State private var settingsDetent = PresentationDetent.medium
+    @State private var settingsDetent = PresentationDetent.large
     @State private var userPosition = MapCameraPosition.userLocation(fallback: .automatic)
     @State private var automaticPosition = MapCameraPosition.region(
         MKCoordinateRegion(
