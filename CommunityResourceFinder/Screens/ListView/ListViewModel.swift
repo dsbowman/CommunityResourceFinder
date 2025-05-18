@@ -64,7 +64,8 @@ import FirebasePerformance
         }
     }
     
-
+//TODO: I need to add logic to account for if the app is expecting cached data but there isn't any or the data has gone stale.
+    
     func loadResources() {
         print("Initial Load Check: \(isInitialLoadComplete)")
         if !isInitialLoadComplete {
