@@ -51,7 +51,7 @@ extension TabViewControl {
             }
             Spacer()
         }
-        .frame(width: isActive ? 100 : 60, height: 50)
+        .frame(width: isActive ? 125 : 60, height: 50)
         //change the first value to .infinity when adding additional menu choices or expand appropriate to the number of choices
         
         .background(isActive ? .darkBlue.opacity(0.5) : .clear)

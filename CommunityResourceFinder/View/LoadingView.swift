@@ -30,6 +30,7 @@ struct LoadingView: View {
         ZStack {
             Color(.systemBackground)
                 .ignoresSafeArea()
+                .opacity(0.8)
             
             VStack {
                 Image(loadingViewIcon)

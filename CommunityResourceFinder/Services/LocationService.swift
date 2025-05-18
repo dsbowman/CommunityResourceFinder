@@ -11,9 +11,10 @@ import MapKit
  
 class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
     
+    private var phillyLocation = CLLocationCoordinate2D(latitude: 39.952583, longitude: -75.165222)
+    
     var locationManager: CLLocationManager?
      @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 39.952583, longitude: -75.165222), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-
      
     
     func checkIfLocationServicesIsEnabled() {
@@ -39,7 +40,7 @@ class LocationService: NSObject, ObservableObject, CLLocationManagerDelegate {
             case .denied:
                 print("Alert: You have denied this app location permissions")
             case .authorizedAlways, .authorizedWhenInUse:
-            region = MKCoordinateRegion(center: locationManager.location!.coordinate, latitudinalMeters: 0.05, longitudinalMeters: 0.05)
+            region = MKCoordinateRegion(center: locationManager.location?.coordinate ?? phillyLocation, latitudinalMeters: 0.05, longitudinalMeters: 0.05)
             @unknown default:
                 break
         }

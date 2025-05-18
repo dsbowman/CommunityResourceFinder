@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,6 +55,9 @@
 		E15D7C5F2D03AA91003C85D1 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E15D7C5E2D03AA91003C85D1 /* FirebaseAppDistribution-Beta */; };
 		E167D7942D73CB8100593970 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = E167D7932D73CB8100593970 /* FirebaseAppCheck */; };
 		E167D7962D73CB8100593970 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E167D7952D73CB8100593970 /* FirebaseStorage */; };
+		E170B6942DC0012600D4ECCC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170B6932DC0012600D4ECCC /* SettingsView.swift */; };
+		E170B6972DC00D2100D4ECCC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170B6952DC00D2100D4ECCC /* SearchView.swift */; };
+		E170B6992DC0F77200D4ECCC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E170B6982DC0F77200D4ECCC /* FirebaseManager.swift */; };
 		E1A647252C8278B50068109E /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A647242C8278B50068109E /* TabbedItems.swift */; };
 		E1B7F1B42D99C8FB00C17337 /* FirebaseImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */; };
 		E1B7F1B62D99CB7800C17337 /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */; };
@@ -120,6 +123,9 @@
 		E123AA442C7E437C0070D9FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E14954042D0BA72700E22BDB /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		E149543F2D0DDCFC00E22BDB /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		E170B6932DC0012600D4ECCC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E170B6952DC00D2100D4ECCC /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		E170B6982DC0F77200D4ECCC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		E1A647242C8278B50068109E /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		E1B7F1B32D99C8FB00C17337 /* FirebaseImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageService.swift; sourceTree = "<group>"; };
 		E1B7F1B52D99CB7800C17337 /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
@@ -142,10 +148,6 @@
 		E1FFEEBC2D246EA60042D7D1 /* MigrationLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationLogView.swift; sourceTree = "<group>"; };
 		E1FFEEC42D248A670042D7D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		E14954412D0DDD4800E22BDB /* SearchView */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SearchView; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E10E6AE22C66CCD1004D2A35 /* Frameworks */ = {
@@ -268,11 +270,12 @@
 		E10E6AFA2C66CD23004D2A35 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				E14954412D0DDD4800E22BDB /* SearchView */,
+				E170B6962DC00D2100D4ECCC /* SearchView */,
 				E10E6AEA2C66CCD1004D2A35 /* ContentView.swift */,
 				E10E6B302C66FCAE004D2A35 /* ListView */,
 				E10E6B312C66FCCF004D2A35 /* MapView */,
 				E10E6B342C66FD05004D2A35 /* ResourceDetail */,
+				E170B6912DC000D500D4ECCC /* Settings */,
 				E10E6B322C66FCE6004D2A35 /* NewResource */,
 				E10E6B332C66FCF7004D2A35 /* Feedback */,
 				E10E6B352C66FD1F004D2A35 /* Experiments */,
@@ -300,6 +303,7 @@
 				E10E6B182C66FB28004D2A35 /* ListViewModel.swift */,
 				E10E6B1A2C66FB41004D2A35 /* ListView.swift */,
 				E10E6B242C66FBE1004D2A35 /* TileView.swift */,
+				E170B6982DC0F77200D4ECCC /* FirebaseManager.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -367,6 +371,22 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		E170B6912DC000D500D4ECCC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E170B6932DC0012600D4ECCC /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E170B6962DC00D2100D4ECCC /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				E170B6952DC00D2100D4ECCC /* SearchView.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		E1A647232C8278940068109E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,9 +436,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				E14954412D0DDD4800E22BDB /* SearchView */,
 			);
 			name = CommunityResourceFinder;
 			productName = CommunityResourceFinder;
@@ -496,6 +513,7 @@
 				E10E6B012C66CDE1004D2A35 /* RFError.swift in Sources */,
 				E10E6B292C66FC30004D2A35 /* NewResourceViewModel.swift in Sources */,
 				E10E6B072C66D01D004D2A35 /* LocationService.swift in Sources */,
+				E170B6972DC00D2100D4ECCC /* SearchView.swift in Sources */,
 				E14954052D0BA72700E22BDB /* FirestoreModel.swift in Sources */,
 				E1B7F1B42D99C8FB00C17337 /* FirebaseImageService.swift in Sources */,
 				E1EAF3032C9C73B800373567 /* DetailViewHeader.swift in Sources */,
@@ -508,6 +526,7 @@
 				E10E6B2D2C66FC74004D2A35 /* FeedbackViewModel.swift in Sources */,
 				E10E6B112C66D0D1004D2A35 /* CategoryListTile.swift in Sources */,
 				E1FFEEB32D2334AB0042D7D1 /* Fields.swift in Sources */,
+				E170B6992DC0F77200D4ECCC /* FirebaseManager.swift in Sources */,
 				E10E6B1B2C66FB41004D2A35 /* ListView.swift in Sources */,
 				E10E6B052C66CFF1004D2A35 /* NetworkManager.swift in Sources */,
 				E1FFEEAE2D2333D00042D7D1 /* ValidationError.swift in Sources */,
@@ -526,6 +545,7 @@
 				E10E6B092C66D04C004D2A35 /* LoadingView.swift in Sources */,
 				E107F0962C69097B00B0B817 /* ContactMenu.swift in Sources */,
 				E10E6B152C66FA6A004D2A35 /* ContactControl.swift in Sources */,
+				E170B6942DC0012600D4ECCC /* SettingsView.swift in Sources */,
 				E10E6B252C66FBE1004D2A35 /* TileView.swift in Sources */,
 				E10E6B192C66FB28004D2A35 /* ListViewModel.swift in Sources */,
 				E1E424D92C8B340F000DD48D /* TabViewControl.swift in Sources */,
