@@ -40,7 +40,7 @@ import FirebasePerformance
     }
     
     
-
+    
     
     // MARK: - Private Properties
     private var listener: ListenerRegistration?
@@ -64,7 +64,7 @@ import FirebasePerformance
         }
     }
     
-//TODO: I need to add logic to account for if the app is expecting cached data but there isn't any or the data has gone stale.
+    //TODO: I need to add logic to account for if the app is expecting cached data but there isn't any or the data has gone stale.
     
     func loadResources() {
         print("Initial Load Check: \(isInitialLoadComplete)")
@@ -169,10 +169,10 @@ import FirebasePerformance
     private func loadContactsForResources(_ document: QueryDocumentSnapshot) async throws -> [Resource.Contact] {
         let contactsSnapshot = try await document.reference.collection("contacts").getDocuments()
         return try contactsSnapshot.documents.compactMap { contactDoc in
-                try contactDoc.data(as: Resource.Contact.self)
+            try contactDoc.data(as: Resource.Contact.self)
         }
     }
-        
+    
     
     private func continuePaginationInBackground() {
         Task {
@@ -315,147 +315,118 @@ import FirebasePerformance
     private func loadContactsForResourcesFromCache(_ document: QueryDocumentSnapshot) async throws -> [Resource.Contact] {
         let contactsSnapshot = try await document.reference.collection("contacts").getDocuments(source: .cache)
         return try contactsSnapshot.documents.compactMap { contactDoc in
-                try contactDoc.data(as: Resource.Contact.self)
+            try contactDoc.data(as: Resource.Contact.self)
         }
     }
     
     
     
-        
     private func calculateMapRegion() {
-            // Skip if no resources with coordinates
-            let resourcesWithCoordinates = resources.compactMap { resource -> CLLocationCoordinate2D? in
-                if let location = resource.primaryLocation, let coordinate = location.coordinate {
-                    return coordinate
-                }
-                return nil
+        // Skip if no resources with coordinates
+        let resourcesWithCoordinates = resources.compactMap { resource -> CLLocationCoordinate2D? in
+            if let location = resource.primaryLocation, let coordinate = location.coordinate {
+                return coordinate
             }
-            
-            guard !resourcesWithCoordinates.isEmpty else { return }
-            
-            // Calculate bounds
-            var minLatitude = 90.0
-            var maxLatitude = -90.0
-            var minLongitude = 180.0
-            var maxLongitude = -180.0
-            
-            for coordinate in resourcesWithCoordinates {
-                minLatitude = min(minLatitude, coordinate.latitude)
-                maxLatitude = max(maxLatitude, coordinate.latitude)
-                minLongitude = min(minLongitude, coordinate.longitude)
-                maxLongitude = max(maxLongitude, coordinate.longitude)
-            }
-            
-            let center = CLLocationCoordinate2D(
-                latitude: (minLatitude + maxLatitude) / 2,
-                longitude: (minLongitude + maxLongitude) / 2
-            )
-            
-            let span = MKCoordinateSpan(
-                latitudeDelta: (maxLatitude - minLatitude) * 1.2,
-                longitudeDelta: (maxLongitude - minLongitude) * 1.2
-            )
-            
-            mapRegion = MKCoordinateRegion(center: center, span: span)
+            return nil
         }
         
-        private func handleFirestoreError(_ error: Error) {
-            print("Firestore error: \(error.localizedDescription)")
-            
-            if let firestoreError = error as NSError?, firestoreError.domain == FirestoreErrorDomain {
-                switch firestoreError.code {
-                case FirestoreErrorCode.unavailable.rawValue:
-                    alertItem = AlertContext.unableToComplete
-                case FirestoreErrorCode.permissionDenied.rawValue:
-                    // Handle permission issues
-                    print("Permission denied: \(firestoreError.localizedDescription)")
-                    alertItem = AlertContext.unableToComplete
-                default:
-                    alertItem = AlertContext.invalidData
-                }
-            } else {
-                alertItem = AlertContext.invalidResponse
+        guard !resourcesWithCoordinates.isEmpty else { return }
+        
+        // Calculate bounds
+        var minLatitude = 90.0
+        var maxLatitude = -90.0
+        var minLongitude = 180.0
+        var maxLongitude = -180.0
+        
+        for coordinate in resourcesWithCoordinates {
+            minLatitude = min(minLatitude, coordinate.latitude)
+            maxLatitude = max(maxLatitude, coordinate.latitude)
+            minLongitude = min(minLongitude, coordinate.longitude)
+            maxLongitude = max(maxLongitude, coordinate.longitude)
+        }
+        
+        let center = CLLocationCoordinate2D(
+            latitude: (minLatitude + maxLatitude) / 2,
+            longitude: (minLongitude + maxLongitude) / 2
+        )
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: (maxLatitude - minLatitude) * 1.2,
+            longitudeDelta: (maxLongitude - minLongitude) * 1.2
+        )
+        
+        mapRegion = MKCoordinateRegion(center: center, span: span)
+    }
+    
+    private func handleFirestoreError(_ error: Error) {
+        print("Firestore error: \(error.localizedDescription)")
+        
+        if let firestoreError = error as NSError?, firestoreError.domain == FirestoreErrorDomain {
+            switch firestoreError.code {
+            case FirestoreErrorCode.unavailable.rawValue:
+                alertItem = AlertContext.unableToComplete
+            case FirestoreErrorCode.permissionDenied.rawValue:
+                // Handle permission issues
+                print("Permission denied: \(firestoreError.localizedDescription)")
+                alertItem = AlertContext.unableToComplete
+            default:
+                alertItem = AlertContext.invalidData
             }
-            
-            isLoading = false
+        } else {
+            alertItem = AlertContext.invalidResponse
         }
         
-        
-        // MARK: - Update Location
-        
-        func updateLocation(resourceID: String, lat: Double, lon: Double) {
-            print("Updating \(resourceID) to lat: \(lat), lon: \(lon)")
-            let resourceRef = db.collection("resources").document(resourceID)
-            resourceRef.updateData([
-                "primaryLocationLat" : lat,
-                "primaryLocationLon" : lon
-            ])
-        }
-        
-        func updateAllLocations() {
-            for resource in resources {
-                if let location = resource.primaryLocation,
-                   let coordinate = location.coordinate {
-                    updateLocation(resourceID: resource.id!, lat: coordinate.latitude, lon: coordinate.longitude)
-                    
-                }
+        isLoading = false
+    }
+
+    
+    
+    // MARK: - Update Location
+    
+    func updateLocation(resourceID: String, lat: Double, lon: Double) {
+        print("Updating \(resourceID) to lat: \(lat), lon: \(lon)")
+        let resourceRef = db.collection("resources").document(resourceID)
+        resourceRef.updateData([
+            "primaryLocationLat" : lat,
+            "primaryLocationLon" : lon
+        ])
+    }
+    
+    func updateAllLocations() {
+        for resource in resources {
+            if let location = resource.primaryLocation,
+               let coordinate = location.coordinate {
+                updateLocation(resourceID: resource.id!, lat: coordinate.latitude, lon: coordinate.longitude)
                 
             }
             
         }
         
-        
-        func createVCard(resource: Resource) -> String {
-            
-            let address: String
-            
-            if let street1 = resource.primaryLocation?.street1,
-               let city = resource.primaryLocation?.city,
-               let state = resource.primaryLocation?.state,
-               let zip = resource.primaryLocation?.zip
-            {
-                address = "\(street1), \(city), \(state) \(zip)"
-            } else {
-                address = ""
-            }
-            
-            return """
-             BEGIN:VCARD
-             VERSION:3.0
-             ORG:\(resource.label)
-             TEL;TYPE=WORK,VOICE:\(resource.mainPhone ?? "")
-             TEL;TYPE=EMERGENCY,VOICE:\(resource.emergencyPhone ?? "")
-             EMAIL;TYPE=WORK:\(resource.generalEmail ?? "")
-             URL:\(resource.url ?? "")
-             ADR;TYPE=WORK:;;\(address)
-             NOTE:\(resource.description ?? "")
-             END:VCARD
-             """
-        }
-        
     }
     
+}
+
+
+enum SheetType: Identifiable {
+    case resourceDetail(Resource)
+    case NewResource
+    case issueForm
+    case webView(URL)
     
-    enum SheetType: Identifiable {
-        case resourceDetail(Resource)
-        case NewResource
-        case issueForm
-        case webView(URL)
-        
-        var id: String {
-            switch self {
-            case .resourceDetail(let resource):
-                return "detail-\(resource.id ?? UUID().uuidString)"
-            case .NewResource:
-                return "NewResource"
-            case .issueForm:
-                return "issueForm"
-            case .webView(let url):
-                return "web-\(url.absoluteString)"
-            }
+    var id: String {
+        switch self {
+        case .resourceDetail(let resource):
+            return "detail-\(resource.id ?? UUID().uuidString)"
+        case .NewResource:
+            return "NewResource"
+        case .issueForm:
+            return "issueForm"
+        case .webView(let url):
+            return "web-\(url.absoluteString)"
         }
-        
     }
+    
+}
 
 
 
@@ -897,17 +868,17 @@ import FirebasePerformance
 //
 //            return resources
 //        }
-        
-        //    private func saveResourcesLocally(_ resources: [Resource]) {
-        //        if let encoded = try? JSONEncoder().encode(resources) {
-        //            UserDefaults.standard.set(encoded, forKey: "cachedResources")
-        //        }
-        //    }
-        //
-        //    private func loadResourcesLocally() -> [Resource]? {
-        //        if let data = UserDefaults.standard.data(forKey: "cachedResources"),
-        //           let resources = try? JSONDecoder().decode([Resource].self, from: data) {
-        //            return resources
-        //        }
-        //        return nil
-        //    }
+
+//    private func saveResourcesLocally(_ resources: [Resource]) {
+//        if let encoded = try? JSONEncoder().encode(resources) {
+//            UserDefaults.standard.set(encoded, forKey: "cachedResources")
+//        }
+//    }
+//
+//    private func loadResourcesLocally() -> [Resource]? {
+//        if let data = UserDefaults.standard.data(forKey: "cachedResources"),
+//           let resources = try? JSONDecoder().decode([Resource].self, from: data) {
+//            return resources
+//        }
+//        return nil
+//    }

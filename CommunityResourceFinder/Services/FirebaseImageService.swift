@@ -8,6 +8,7 @@
 import FirebaseStorage
 import UIKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 class FirebaseImageService {
     static let shared = FirebaseImageService()
@@ -103,4 +104,7 @@ class FirebaseImageService {
         let imageDir = cacheDir.appendingPathComponent("FirebaseImages")
         try? fileManager.removeItem(at: imageDir)
     }
+    
 }
+
+

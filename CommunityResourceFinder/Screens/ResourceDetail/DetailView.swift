@@ -24,6 +24,7 @@ struct DetailView: View {
     
     var body: some View {
         NavigationStack {
+            Spacer().frame(height: 20)
             GeometryReader { geometry in
                 VStack {
                     // Collapsible Header
@@ -143,24 +144,24 @@ struct DetailView: View {
                     
                 }
                 .toolbar {
-//                    ToolbarItem {
-//                        ShareLink(
-//                            item: viewModel.createVCard(resource: resource),
-//                            subject: Text("Contact information for \(resource.label)"),
-//                            message: Text("Here's a resource that might be helpful"),
-//                            preview: SharePreview(
-//                                resource.label,
-//                                image: FirebaseImage(path: resource.imagePath)
-//                            )
-//                        ) {
-//                            Label("Share", systemImage: "square.and.arrow.up")
-//                                .padding()
-//                                .background(Color.blue)
-//                                .foregroundColor(.white)
-//                                .cornerRadius(8)
-//                        }
-//                        
-//                    }
+                    ToolbarItem {
+                        ShareLink(
+                            item: viewModel.createVCardFile(resource: resource),
+                            subject: Text("Contact information for \(resource.label)"),
+                            message: Text("Here's a resource that might be helpful"),
+                            preview: SharePreview(
+                                resource.label,
+//                                image: //TODO: Send Logo Image to recepient
+                            )
+                        ) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        
+                    }
                 }
             }
             .ignoresSafeArea(edges: .top) // Ignore safe area to allow the header to collapse smoothly
