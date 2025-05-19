@@ -78,24 +78,27 @@ struct TileView: View {
                 
             }
             .sheet(item: $viewModel.activeSheet) { sheetType in
-                Spacer().frame(height: 20)
                 switch sheetType {
                 case .resourceDetail(let resource):
                     DetailView(resource: resource)
+                        .presentationDragIndicator(.visible)
                     
                 case .issueForm:
                     WebView(url: URL(string:  "https://airtable.com/appG874fGad8U9K7y/pag8d4CoJAscwVHcY/form")!)
+                        .presentationDragIndicator(.visible)
 
                 case .NewResource:
                     WebView(url: URL(string: "https://airtable.com/appG874fGad8U9K7y/paggA8fCAQVTEOrBT/form")!)
+                        .presentationDragIndicator(.visible)
     
 
                 case .webView(_):
                     WebView(url: URL(string: "https://www.resourcefinder.app/") ?? URL(string: "https://www.google.com")!)
+                        .presentationDragIndicator(.visible)
                 }
  
             }
-            .presentationDragIndicator(.visible)
+            
 
         }
     }
