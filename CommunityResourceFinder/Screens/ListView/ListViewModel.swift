@@ -378,12 +378,7 @@ import FirebasePerformance
         
         isLoading = false
     }
-    
-    //MARK: Process Image for sharelink
-    
-    func getImageforShareLink(path: ) -> UIImage {
-        
-    }
+
     
     
     // MARK: - Update Location
